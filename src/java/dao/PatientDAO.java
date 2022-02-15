@@ -17,10 +17,10 @@ import java.util.Hashtable;
 import java.util.List;
 import utils.Utils;
 
-
 public class PatientDAO implements DAO<Patient> {
+
     Connection conn = DBcontext.getConnection();
-   
+
     AreaDAO khuCachLyDAO = new AreaDAO();
 
     @Override
@@ -43,9 +43,9 @@ public class PatientDAO implements DAO<Patient> {
                 p.setTimeIn(rs.getTimestamp("time_in"));
                 p.setTimeOut(rs.getTimestamp("time_out"));
                 int idPhong = rs.getInt("room_id");
-                p.setPhong(null);
+                p.setRoom(null);
                 int idKhuCachLy = rs.getInt("area_id");
-                p.setKhuCachLy(khuCachLyDAO.get(idKhuCachLy));
+                p.setArea(khuCachLyDAO.get(idKhuCachLy));
                 qq.add(p);
             }
             return qq;
@@ -69,6 +69,7 @@ public class PatientDAO implements DAO<Patient> {
         qq = parse(sql);
         return (qq.isEmpty() ? null : qq.get(0));
     }
+
     @Override
     public List<Patient> getAll() {
         return null;
@@ -102,19 +103,59 @@ public class PatientDAO implements DAO<Patient> {
 
     @Override
     public void delete(Patient t) {
-       
+        try {
+            String sql = "DELETE FROM dbo.patient WHERE patient_id = " + t.getPatientId();
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException x) {
+            x.printStackTrace();
+        }
     }
 
-   
+    public List<Patient> getList(int offset, int noOfRecords, int idKhuCachLy) {
+        String sql = "WITH Rows AS\n"
+                + "(\n"
+                + "    SELECT\n"
+                + "              ROW_NUMBER() OVER (ORDER BY patient_id) [Row]\n"
+                + "            , *\n"
+                + "        FROM\n"
+                + "              dbo.patient\n"
+                + ")\n"
+                + "SELECT TOP " + noOfRecords + "\n"
+                + "          *\n"
+                + "     FROM\n"
+                + "         Rows\n"
+                + "    WHERE Row > " + offset + " AND Rows.area_id = " + idKhuCachLy;
+        //System.out.println("sql " + sql);
+        List<Patient> qq = new ArrayList<>();
+        qq = parse(sql);
+        return qq;
+    }
+
+    public int getNoOfRecord(int idKhuCachLy) {
+        try {
+            String sql = "SELECT COUNT(*) AS soluong FROM dbo.patient WHERE area_id = " + idKhuCachLy;
+            Statement sttm = conn.createStatement();
+            ResultSet rs = sttm.executeQuery(sql);
+            rs.next();
+            return rs.getInt("soluong");
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    
     @Override
     public void create(Patient t) {
-        
 
     }
 
     public List<Patient> SearchByKey(String key, int offset, int noOfRecords) {
-        
+
         return null;
     }
 
+    public static void main(String[] args) {
+        PatientDAO dao = new PatientDAO();
+        System.out.println(dao.getNoOfRecord(1));
+    }
 }

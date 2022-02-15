@@ -16,6 +16,22 @@
         <servlet-name>FeedBackServlet</servlet-name>
         <servlet-class>controller.base.FeedBackServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewPatientServlet</servlet-name>
+        <servlet-class>controller.Patient.viewPatientServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewPatient</servlet-name>
+        <servlet-class>controller.Patient.viewPatient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewNgCachLy</servlet-name>
+        <servlet-class>controller.nguoiCachLy.viewNgCachLy</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addNgCachLy</servlet-name>
+        <servlet-class>controller.nguoiCachLy.addNgCachLy</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -31,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>FeedBackServlet</servlet-name>
         <url-pattern>/FeedBackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewNgCachLy</servlet-name>
+        <url-pattern>/NguoiCachLy/view-list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addNgCachLy</servlet-name>
+        <url-pattern>/NguoiCachLy/add</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -56,8 +80,9 @@
             <description>JSP configuration for the admin console
             </description>
             <url-pattern>/home.jsp</url-pattern>
-             <url-pattern>/feedback.jsp</url-pattern>
-             <url-pattern>/listfeedback.jsp</url-pattern>
+            <url-pattern>/feedback.jsp</url-pattern>
+            <url-pattern>/listfeedback.jsp</url-pattern>
+            <url-pattern>/Patient/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header2.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>

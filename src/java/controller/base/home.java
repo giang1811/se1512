@@ -9,6 +9,7 @@ package controller.base;
 import dao.AccountDAO;
 import entity.Area;
 import entity.Account;
+import entity.Nurse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -38,7 +39,6 @@ public class home extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
         Account user = (Account)ss.getAttribute("userLogin");
-       
         Notification noti = null;
         RequestDispatcher rt = null;
         int id = user.getType().getIdLoaiTaiKhoan();
@@ -49,7 +49,7 @@ public class home extends HttpServlet {
                 rt = request.getRequestDispatcher("home.jsp");
                 rt.forward(request, response);
                 break;
-            case 2: // staff
+            case 2: // nurse
                 noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Staff", "success");
                 request.setAttribute("notify", noti);
                 rt = request.getRequestDispatcher("home.jsp");

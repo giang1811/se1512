@@ -8,6 +8,8 @@ package controller.base;
 import dao.AccountDAO;
 import dao.PatientDAO;
 import entity.Account;
+import entity.Area;
+import entity.Nurse;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utils.Notification;
 import static utils.Utils.md5;
-
 
 public class LoginServlet extends HttpServlet {
 
@@ -50,14 +51,21 @@ public class LoginServlet extends HttpServlet {
             Notification noti = new Notification("Error", "Tài khoản không đúng. Vui lòng kiểm tra lại.", "error");
             request.setAttribute("notify", noti);
             RequestDispatcher rt = request.getRequestDispatcher("login.jsp");
-            
+
             rt.forward(request, response);
         } else {
             PatientDAO ngDAO = new PatientDAO();
-           user.setPatient(ngDAO.getByAccountId(user.getAccountId()));
+            user.setPatient(ngDAO.getByAccountId(user.getAccountId()));
             ss.setAttribute("userLogin", user);
-            RequestDispatcher rt = request.getRequestDispatcher("home");
-            rt.forward(request, response);
+            if (user.getType().getIdLoaiTaiKhoan() == 2) {
+                Nurse nurse = taiKhoanDAO.getNurseByAccoutId(user.getAccountId());
+                ss.setAttribute("nurse", nurse);
+                RequestDispatcher rt = request.getRequestDispatcher("home");
+                rt.forward(request, response);
+            } else {
+                RequestDispatcher rt = request.getRequestDispatcher("home");
+                rt.forward(request, response);
+            }
         }
     }
 

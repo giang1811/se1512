@@ -1,34 +1,35 @@
 package entity;
+
 import java.util.Date;
 
 public class Patient {
-  
+
     private Integer patientId;
-   
+
     private String patientName;
-  
+
     private Integer age;
-  
+
     private String passPort;
-   
+
     private String gender;
-   
+
     private String addree;
-   
+
     private Integer phoneNumber;
-    
+
     private String region;
-  
+
     private String suspicionLevel;
-  
+
     private Date timeIn;
-  
+
     private Date timeOut;
-   
-    private Room phong;
-    
-    private Area khuCachLy;
-    
+
+    private Room room;
+
+    private Area area;
+
     public Patient() {
     }
 
@@ -44,8 +45,8 @@ public class Patient {
         this.suspicionLevel = suspicionLevel;
         this.timeIn = timeIn;
         this.timeOut = timeOut;
-        this.phong = phong;
-        this.khuCachLy = khuCachLy;
+        this.room = phong;
+        this.area = khuCachLy;
     }
 
     public Patient(Integer patientId) {
@@ -140,25 +141,38 @@ public class Patient {
         this.timeOut = timeOut;
     }
 
-    public Room getPhong() {
-        return phong;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setPhong(Room phong) {
-        this.phong = phong;
+    public void setRoom(Room phong) {
+        this.room = phong;
     }
 
-    public Area getKhuCachLy() {
-        return khuCachLy;
+    public Area getArea() {
+        return area;
     }
 
-    public void setKhuCachLy(Area khuCachLy) {
-        this.khuCachLy = khuCachLy;
+    public void setArea(Area khuCachLy) {
+        this.area = khuCachLy;
     }
 
     @Override
     public String toString() {
-        return "NguoiCachLy{" + "patientId=" + patientId + ", patientName=" + patientName + ", age=" + age + ", passPort=" + passPort + ", gender=" + gender + ", addree=" + addree + ", phoneNumber=" + phoneNumber + ", region=" + region + ", suspicionLevel=" + suspicionLevel + ", timeIn=" + timeIn + ", timeOut=" + timeOut + ", phong=" + phong + ", khuCachLy=" + khuCachLy + '}';
+        String result = "Patient ID = " + patientId + "\n"
+                + "Patient Name = " + patientName + "\n"
+                + "Patient Phone = " + age + "\n"
+                + "Patient Fullname = " + passPort + "\n"
+                + "Patient Account_Id = " + gender + "\n"
+                + "Patient Address = " + addree + "\n"
+                + "Patient Phone Number = " + phoneNumber + "\n"
+                + "Patient Region = " + region + "\n"
+                + "Patient Suspicion Level = " + suspicionLevel + "\n"
+                + "Patient Time In = " + timeIn + "\n"
+                + "Patient Time Out = " + timeOut + "\n"
+                + "Patient Room Name = " + room.getRoomName() + "\n"
+                + "Patient Area Name = " + area.getAreaName() + "\n";
+        return result;
     }
 
 }

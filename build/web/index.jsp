@@ -21,19 +21,19 @@
             <div class="news-item">
                 <img src="assets/img/thumb/2.jpg" />
                 <div class="news-item__label">Thực hiện thông điêp 5K</div>
-                <div class="news-item__time">Ngày 3, tháng 3, năm 2021</div>
+                <div class="news-item__time">Ngày 14, tháng 2, năm 2021</div>
                 <div class="news-item__info">Bộ y tế khuyến nghị người dân thực hiện thông điệp 5K đầy...</div>        
             </div>
             <div class="news-item">
                 <img src="assets/img/thumb/3.jpg" />
                 <div class="news-item__label">Thực hiện thông điêp 5K</div>
-                <div class="news-item__time">Ngày 3, tháng 3, năm 2021</div>
+                <div class="news-item__time">Ngày 14, tháng 2, năm 2021</div>
                 <div class="news-item__info">Bộ y tế khuyến nghị người dân thực hiện thông điệp 5K đầy...</div>       
             </div>
             <div class="news-item">
                 <img src="assets/img/thumb/4.png" />
                <div class="news-item__label">Thực hiện thông điêp 5K</div>
-                <div class="news-item__time">Ngày 3, tháng 3, năm 2021</div>
+                <div class="news-item__time">Ngày 14, tháng 2, năm 2021</div>
                 <div class="news-item__info">Bộ y tế khuyến nghị người dân thực hiện thông điệp 5K đầy...</div> ...</div>        
             </div>
         </div>
