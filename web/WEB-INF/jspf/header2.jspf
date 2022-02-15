@@ -103,20 +103,20 @@
                             <span class="sidebar-info">Tìm kiếm</span>
                         </a>
                     </li>
-                    <% int idLoaiTaiKhoan;
+                    <% int acocuntTypeId;
                         try {
-                            idLoaiTaiKhoan = userLogin.getType().getIdLoaiTaiKhoan();
+                            acocuntTypeId = userLogin.getType().getAccountTypeId();
                         } catch (Exception e) {
-                            idLoaiTaiKhoan = 0;
+                            acocuntTypeId = 0;
                         }
 
-                        if (idLoaiTaiKhoan != 3) {      //Manager or Staff
+                        if (acocuntTypeId != 3) {      //Manager or Staff
 %>
-                    <li><a class="sidebar-li" href="<%=request.getContextPath()%>/NguoiCachLy/view-list"><i class="fas fa-user sidebar-icon"></i>
+                    <li><a class="sidebar-li" href="<%=request.getContextPath()%>/Patient/view-list"><i class="fas fa-user sidebar-icon"></i>
                             <span class="sidebar-info">Người cách ly</span>
                         </a>
                     </li>
-                    <% if (idLoaiTaiKhoan != 2) { // Manager %>  
+                    <% if (acocuntTypeId != 2) { // Manager %>  
 
                     <li><a class="sidebar-li" href=""><i class="fas fa-file-invoice sidebar-icon"></i>
                             <span class="sidebar-info">QL tài khoản</span>
@@ -128,7 +128,7 @@
                         </a>
                     </li>
                     <% }%>
-                    <% if (idLoaiTaiKhoan == 3) { // Manager %>  
+                    <% if (acocuntTypeId == 3) { // Manager %>  
                     <li><a class="sidebar-li" href="FeedBackServlet"><i class="fas fa-file-invoice sidebar-icon"></i>
                             <span class="sidebar-info">FeedBack</span>
                         </a>
@@ -140,3 +140,4 @@
                     </li>
                 </ul>
             </div>
+           

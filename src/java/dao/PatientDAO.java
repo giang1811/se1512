@@ -5,13 +5,19 @@
  */
 package dao;
 
+import entity.Area;
 import entity.Patient;
+import entity.Room;
 import java.sql.Connection;
 import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -19,9 +25,29 @@ import utils.Utils;
 
 public class PatientDAO implements DAO<Patient> {
 
+    private final String SQL_INSERT = "INSERT INTO dbo.patient\n"
+            + "(\n"
+            + "    full_name,\n"
+            + "    age,\n"
+            + "    gender,\n"
+            + "    address,\n"
+            + "    partpost,\n"
+            + "    phone,\n"
+            + "    region,\n"
+            + "    suspicion_level,\n"
+            + "    time_in,\n"
+            + "    time_out,\n"
+            + "    room_id,\n"
+            + "    area_id,\n"
+            + "    account_id\n"
+            + ")\n"
+            + "VALUES\n"
+            + "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
     Connection conn = DBcontext.getConnection();
 
-    AreaDAO khuCachLyDAO = new AreaDAO();
+    AreaDAO areaDAO = new AreaDAO();
+    RoomDAO roomDAO = new RoomDAO();
 
     @Override
     public List<Patient> parse(String sql) {
@@ -42,10 +68,10 @@ public class PatientDAO implements DAO<Patient> {
                 p.setSuspicionLevel(rs.getString("suspicion_level"));
                 p.setTimeIn(rs.getTimestamp("time_in"));
                 p.setTimeOut(rs.getTimestamp("time_out"));
-                int idPhong = rs.getInt("room_id");
-                p.setRoom(null);
-                int idKhuCachLy = rs.getInt("area_id");
-                p.setArea(khuCachLyDAO.get(idKhuCachLy));
+                int room_id = rs.getInt("room_id");
+                p.setRoom(roomDAO.get(room_id));
+                int area_id = rs.getInt("area_id");
+                p.setArea(areaDAO.get(area_id));
                 qq.add(p);
             }
             return qq;
@@ -63,7 +89,13 @@ public class PatientDAO implements DAO<Patient> {
         return (qq.isEmpty() ? null : qq.get(0));
     }
 
-    public Patient getByAccountId(int id) {
+    /**
+     * Get Patient by account_id
+     *
+     * @param id
+     * @return Patient
+     */
+    public Patient getPatientByAccountId(int id) {
         String sql = "SELECT * from patient where account_id = " + id;
         List<Patient> qq = new ArrayList<>();
         qq = parse(sql);
@@ -112,7 +144,15 @@ public class PatientDAO implements DAO<Patient> {
         }
     }
 
-    public List<Patient> getList(int offset, int noOfRecords, int idKhuCachLy) {
+    /**
+     * Get Number of Patient stay in Area
+     *
+     * @param offset initial Row
+     * @param noOfRecords number of Patient
+     * @param areaId area_id
+     * @return List of Patient
+     */
+    public List<Patient> getList(int offset, int noOfRecords, int areaId) {
         String sql = "WITH Rows AS\n"
                 + "(\n"
                 + "    SELECT\n"
@@ -125,28 +165,65 @@ public class PatientDAO implements DAO<Patient> {
                 + "          *\n"
                 + "     FROM\n"
                 + "         Rows\n"
-                + "    WHERE Row > " + offset + " AND Rows.area_id = " + idKhuCachLy;
+                + "    WHERE Row > " + offset + " AND Rows.area_id = " + areaId;
         //System.out.println("sql " + sql);
         List<Patient> qq = new ArrayList<>();
         qq = parse(sql);
         return qq;
     }
 
-    public int getNoOfRecord(int idKhuCachLy) {
+    /**
+     * Get Number of Record in Area
+     *
+     * @param areaId
+     * @return number of record
+     */
+    public int getNoOfRecord(int areaId) {
         try {
-            String sql = "SELECT COUNT(*) AS soluong FROM dbo.patient WHERE area_id = " + idKhuCachLy;
+            String sql = "SELECT COUNT(*) AS NoOfRecords FROM dbo.patient WHERE area_id = " + areaId;
             Statement sttm = conn.createStatement();
             ResultSet rs = sttm.executeQuery(sql);
             rs.next();
-            return rs.getInt("soluong");
+            return rs.getInt("NoOfRecords");
         } catch (Exception e) {
             return 0;
         }
     }
-    
-    @Override
-    public void create(Patient t) {
+/*
+    String fullName = request.getParameter("fullname");
+    String suspicionLevel = request.getParameter("suspicionLevel");
+    String age = request.getParameter("age");
+    int age_int = Integer.parseInt(age);
+    String gender = request.getParameter("gender");
+    String passport = request.getParameter("passport");
+    String region = request.getParameter("region");
+    String address = request.getParameter("address");
+    String phone = request.getParameter("phone");
+    int phone_int = Integer.parseInt(phone);
+    String roomName = request.getParameter("roomName");
+    */
 
+    @Override
+    public void create(Patient p) {
+        try (
+            PreparedStatement prep = conn.prepareStatement(SQL_INSERT)) {
+            prep.setString(1, p.getPatientName());
+            prep.setInt(2, p.getAge());
+            prep.setString(3, p.getGender());
+            prep.setString(4, p.getAddree());
+            prep.setString(5, p.getPassPort());
+            prep.setInt(6, p.getPhoneNumber());
+            prep.setString(7, p.getRegion());
+            prep.setString(8, p.getSuspicionLevel());
+            prep.setTimestamp(9, (java.sql.Timestamp) p.getTimeIn());
+            prep.setTimestamp(10, null);
+            prep.setInt(11, p.getRoom().getRoomId());
+            prep.setInt(12, p.getArea().getAreaId());
+            prep.setInt(13, 30);
+            prep.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
     }
 
     public List<Patient> SearchByKey(String key, int offset, int noOfRecords) {
@@ -154,8 +231,19 @@ public class PatientDAO implements DAO<Patient> {
         return null;
     }
 
-    public static void main(String[] args) {
-        PatientDAO dao = new PatientDAO();
-        System.out.println(dao.getNoOfRecord(1));
+    public static void main(String[] args) throws ParseException {
+//        PatientDAO dao = new PatientDAO();
+//        Patient p = new Patient();
+//        Area area = new Area(4, "Khu cách ly Hà Tây", "Hà Tây", "098723984");
+//        Room room = new Room(4, "A3", "15", "Nothing", area);
+//        String date = "11/03/2001";
+//        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        p.setPatientName("Long Ka");
+//        p.setSuspicionLevel("F0");
+//        p.setRoom(room);
+//        p.setTimeIn(new Timestamp(System.currentTimeMillis()));
+//        p.setArea(area);
+//        p.setAge(20);
+//        dao.create(p);
     }
 }

@@ -14,6 +14,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,9 +23,17 @@ import java.util.List;
  */
 public class RoomDAO implements DAO<Room> {
 
-    private final String SQL_INSERT = "Insert into phong"
-            + "(ten_phong, so_giuong, ghi_chu, id_khu_cach_ly) values " + "(?, ?, ?, ?)";
-    private final String SQL_UPDATE = "update phong set ten_phong = ?, so_giuong = ?, ghi_chu = ? where id_phong = ?";
+    private final String SQL_INSERT = "INSERT INTO dbo.room\n"
+            + "(\n"
+            + "    room_name,\n"
+            + "    bad_number,\n"
+            + "    note,\n"
+            + "    area_id\n"
+            + ")\n"
+            + "VALUES\n"
+            + "(?,?,?,?)";
+    private final String SQL_UPDATE = "UPDATE dbo.room SET room_name = ?, bad_number = ?, note = ?\n"
+            + "WHERE room_id = ";
 
     private String SQL_COUNT_INCLUDE = "SELECT sum(so_giuong) as soluong FROM datn.phong ";
     Connection conn = DBcontext.getConnection();
@@ -41,8 +51,8 @@ public class RoomDAO implements DAO<Room> {
                 p.setRoomName(rs.getString("room_name"));
                 p.setBadNumber(rs.getString("bad_number"));
                 p.setNote(rs.getString("note"));
-                int idKhuCachLy = rs.getInt("area_id");
-                p.setKhuCachLy(areaDAO.get(idKhuCachLy));
+                int area_id = rs.getInt("area_id");
+                p.setArea(areaDAO.get(area_id));
                 qq.add(p);
             }
             return qq;
@@ -68,11 +78,26 @@ public class RoomDAO implements DAO<Room> {
         return qq;
     }
 
-    public List<Room> getAllInKhu(int idKhu) {
-        String sql = "select * from Room where area_id = " + idKhu;
+    public List<Room> getAllInArea(int area_id) {
+        String sql = "select * from Room where area_id = " + area_id;
         List<Room> qq = new ArrayList<>();
         qq = parse(sql);
         return qq;
+    }
+
+    public String getRoomNameByRoomId(int roomId) {
+        String sql = "select room_name from Room where room_id = " + roomId;
+        try {
+            Statement sttm = conn.createStatement();
+            ResultSet rs = sttm.executeQuery(sql);
+            if (rs.next()) {
+                String result = rs.getString("room_name");
+                return result;
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
     }
 
     @Override
@@ -135,8 +160,8 @@ public class RoomDAO implements DAO<Room> {
 //        qq = parse(sql);
 //        return qq;
 //    }
-    public int getNoOfRecord(int idKhuCachLy) throws SQLException {
-        String sql = "select count(*) as soluong from phong where id_khu_cach_ly = " + idKhuCachLy;
+    public int getNoOfRecord(int area_id) throws SQLException {
+        String sql = "select count(*) as soluong from phong where id_khu_cach_ly = " + area_id;
         Statement sttm = conn.createStatement();
         ResultSet rs = sttm.executeQuery(sql);
         rs.next();

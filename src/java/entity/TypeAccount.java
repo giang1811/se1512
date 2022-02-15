@@ -4,36 +4,36 @@ package entity;
 public class TypeAccount  {
 
   
-    private Integer idLoaiTaiKhoan;
+    private Integer accountTypeId;
     
-    private String tenLoaiTaiKhoan;
+    private String accountTypeName;
 
     public TypeAccount() {
     }
 
-    public TypeAccount(Integer idLoaiTaiKhoan) {
-        this.idLoaiTaiKhoan = idLoaiTaiKhoan;
+    public TypeAccount(Integer accountTypeId) {
+        this.accountTypeId = accountTypeId;
     }
 
-    public Integer getIdLoaiTaiKhoan() {
-        return idLoaiTaiKhoan;
+    public Integer getAccountTypeId() {
+        return accountTypeId;
     }
 
-    public void setIdLoaiTaiKhoan(Integer idLoaiTaiKhoan) {
-        this.idLoaiTaiKhoan = idLoaiTaiKhoan;
+    public void setAccountTypeId(Integer accountTypeId) {
+        this.accountTypeId = accountTypeId;
     }
 
-    public String getTenLoaiTaiKhoan() {
-        return tenLoaiTaiKhoan;
+    public String getAccountTypeName() {
+        return accountTypeName;
     }
 
-    public void setTenLoaiTaiKhoan(String tenLoaiTaiKhoan) {
-        this.tenLoaiTaiKhoan = tenLoaiTaiKhoan;
+    public void setAccountTypeName(String accountTypeName) {
+        this.accountTypeName = accountTypeName;
     }
 
     @Override
     public String toString() {
-        return "entity.LoaiTaiKhoan[ idLoaiTaiKhoan=" + idLoaiTaiKhoan + " ]";
+        return "entity.AccountType[ accountTypeId=" + accountTypeId + " ]";
     }
     
 }

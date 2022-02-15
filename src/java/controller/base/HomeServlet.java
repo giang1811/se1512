@@ -22,7 +22,7 @@ import utils.Notification;
 import static utils.Utils.md5;
 
 
-public class home extends HttpServlet {
+public class HomeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,10 @@ public class home extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
-        Account user = (Account)ss.getAttribute("userLogin");
+        Account account = (Account)ss.getAttribute("userLogin");
         Notification noti = null;
         RequestDispatcher rt = null;
-        int id = user.getType().getIdLoaiTaiKhoan();
+        int id = account.getType().getAccountTypeId();
         switch (id){
             case 1: //manager 
                 noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Manager", "success");

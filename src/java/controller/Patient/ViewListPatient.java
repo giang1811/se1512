@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.nguoiCachLy;
+package controller.Patient;
 
 import dao.PatientDAO;
 import entity.Account;
@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author CHUNG
  */
-public class viewNgCachLy extends HttpServlet {
+public class ViewListPatient extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,7 +40,8 @@ public class viewNgCachLy extends HttpServlet {
         Account user = (Account) ss.getAttribute("userLogin");
         PrintWriter out = response.getWriter();
 
-        if (user.getType().getIdLoaiTaiKhoan() == 2) {
+        // if nurse login
+        if (user.getType().getAccountTypeId() == 2) {
             Nurse nurse = (Nurse) ss.getAttribute("nurse");
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
@@ -50,11 +51,12 @@ public class viewNgCachLy extends HttpServlet {
             int noOfRecords = dao.getNoOfRecord(nurse.getId_area());
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfRecords", noOfRecords);
-            request.setAttribute("ngCachLyList", list);
+            request.setAttribute("list", list);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             RequestDispatcher view = request.getRequestDispatcher("../Patient/list.jsp");
             view.forward(request, response);
+        //  if manager login
         } else {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
@@ -64,7 +66,7 @@ public class viewNgCachLy extends HttpServlet {
             int noOfRecords = dao.getNoOfRecord(1);
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfRecords", noOfRecords);
-            request.setAttribute("ngCachLyList", list);
+            request.setAttribute("list", list);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             RequestDispatcher view = request.getRequestDispatcher("../Patient/list.jsp");

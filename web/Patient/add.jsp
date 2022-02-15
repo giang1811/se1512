@@ -17,20 +17,20 @@
     Nurse nurse = (Nurse)ss.getAttribute("nurse");
     int area_id = nurse.getId_area();
     RoomDAO phongDAO = new RoomDAO();
-    List<Room> phongs = phongDAO.getAllInKhu(area_id);
+    List<Room> phongs = phongDAO.getAllInArea(area_id);
     %>
 
     <div class="form-container">
         <form action="add" method="POST" id="form-dn" class="form">
             <div class="form-header">
                 <div class="form-group form-group__special">
-                    <label for="ho_ten" class="form-label">Họ và tên:</label>
-                    <input id="ho_ten" class="form-control" name="ho_ten" type="text" required>
+                    <label for="fullname" class="form-label">Họ và tên:</label>
+                    <input id="fullname" class="form-control" name="fullname" type="text" required>
                     <span class="form-message"></span>
                 </div>
                 <div class="form-group">
-                    <label for="phan_loai" class="form-label">Phân loại:</label>
-                    <select name="phan_loai" id="phan_loai">
+                    <label for="suspicionLevel" class="form-label">Phân loại:</label>
+                    <select name="suspicionLevel" id="suspicionLevel">
                         <option value="F1">F1</option>
                         <option value="F2">F2</option>
                         <option value="F3">F3</option>
@@ -40,40 +40,40 @@
             </div>
             <span class="form-span">Lý lịch cá nhân</span>
             <div class="form-group">
-                <label for="tuoi" class="form-label">Tuổi:</label>
-                <input id="tuoi" class="form-control" name="tuoi" type="text" pattern="[0-9]{1,2}" title="Vui lòng nhập đúng số tuổi">
+                <label for="age" class="form-label">Tuổi:</label>
+                <input id="age" class="form-control" name="age" type="text" pattern="[0-9]{1,2}" title="Vui lòng nhập đúng số tuổi">
                 <span class="form-message"></span>
             </div>
             <div class="form-group">
-                <label for="gioi_tinh" class="form-label">Giới tính:</label>
-                <select name="gioi_tinh" id="gioi_tinh" class="form-control">
+                <label for="gender" class="form-label">Giới tính:</label>
+                <select name="gender" id="gender" class="form-control">
                     <option value="Nam" selected="selected">Nam</option>
                     <option value="Nữ">Nữ</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="ma_can_cuoc" class="form-label">Mã căn cước:</label>
-                <input id="ma_can_cuoc" class="form-control" name="ma_can_cuoc" type="text" >
+                <label for="passport" class="form-label">Mã căn cước:</label>
+                <input id="passport" class="form-control" name="passport" type="text" >
                 <span class="form-message"></span>
             </div>
             <div class="form-group">
-                <label for="quoc_tich" class="form-label">Quốc tịch:</label>
-                <input id="quoc_tich" class="form-control" name="quoc_tich" type="text" required>
+                <label for="region" class="form-label">Quốc tịch:</label>
+                <input id="region" class="form-control" name="region" type="text" required>
                 <span class="form-message"></span>
             </div>
             <div class="form-group">
-                <label for="dia_chi" class="form-label">Địa chỉ:</label>
-                <input id="dia_chi" class="form-control" name="dia_chi" type="text" required>
+                <label for="address" class="form-label">Địa chỉ:</label>
+                <input id="address" class="form-control" name="address" type="text" required>
                 <span class="form-message"></span>
             </div>
             <div class="form-group">
-                <label for="so_dien_thoai" class="form-label">Số điện thoại:</label>
-                <input id="so_dien_thoai" class="form-control" name="so_dien_thoai" type="text" pattern="[0-9]{8,11}" title="Vui lòng nhập đúng số điện thoại">
+                <label for="phone" class="form-label">Số điện thoại:</label>
+                <input id="phone" class="form-control" name="phone" type="text" pattern="[0-9]{8,11}" title="Vui lòng nhập đúng số điện thoại">
                 <span class="form-message"></span>
             </div>
             <div class="form-group">
-                <label for="phong" class="form-label">Xếp vào phòng số</label>
-                <select name="phong" id="phong" class="form-control" required>
+                <label for="roomName" class="form-label">Xếp vào phòng số</label>
+                <select name="roomName" id="roomName" class="form-control" required>
                     <% for(Room phong : phongs){ %>
                     <option value="<%=phong.getRoomId()%>"><%=phong.getRoomName()%></option>
                     <% } %>

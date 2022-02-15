@@ -23,19 +23,19 @@
                 <th width="20%">Mức độ nghi nhiễm</th>
                 <th width="20%">Hành động</th>
             </tr>
-            <c:forEach var="nguoiCachly" items="${ngCachLyList}">
+            <c:forEach var="patient" items="${list}">
                 <tr>
-                    <td>${nguoiCachly.getPatientId()}</td>
-                    <td>${nguoiCachly.getPatientName()}</td>
-                    <td>${nguoiCachly.getAge()}</td>
-                    <td>${nguoiCachly.getRoom().getRoomeName()}</td>
-                <c:if test="${empty nguoiCachly.getTimeOut()}"><td>${Utils.getDistanceTime(nguoiCachly.getTimeIn(), nguoiCachly.getTimeOut()) + 1} ngày</td></c:if>
-                <c:if test="${not empty nguoiCachly.getTimeOut()}"><td style="color: red; font-weight: 500;">Đã ra</td></c:if>
-                <td data-filetype="${nguoiCachly.getSuspicionLevel()}">${nguoiCachly.getSuspicionLevel()}</td>
+                    <td>${patient.getPatientId()}</td>
+                    <td>${patient.getPatientName()}</td>
+                    <td>${patient.getAge()}</td>
+                    <td>${patient.getRoom().getRoomName()}</td>
+                <c:if test="${empty patient.getTimeOut()}"><td>${Utils.getDistanceTime(nguoiCachly.getTimeIn(), patient.getTimeOut()) + 1} ngày</td></c:if>
+                <c:if test="${not empty patient.getTimeOut()}"><td style="color: red; font-weight: 500;">Đã ra</td></c:if>
+                <td data-filetype="${patient.getSuspicionLevel()}">${patient.getSuspicionLevel()}</td>
                 <td class="td-action">
-                    <a href="<%=request.getContextPath()%>/NguoiCachLy/view-detail?id=${nguoiCachly.getPatientId()}"><i class="far fa-calendar-alt"></i></a>
-                    <a href="<%=request.getContextPath()%>/NguoiCachLy/update.jsp?id=${nguoiCachly.getPatientId()}"><i class="fas fa-pen"></i></a>
-                    <a href="<%=request.getContextPath()%>/NguoiCachLy/delete?id=${nguoiCachly.getPatientId()}" style="background-color: red"><i class="fas fa-trash-alt"></i></a>
+                    <a href="<%=request.getContextPath()%>/Patient/view-detail?id=${patient.getPatientId()}"><i class="far fa-calendar-alt"></i></a>
+                    <a href="<%=request.getContextPath()%>/Patient/update.jsp?id=${patient.getPatientId()}"><i class="fas fa-pen"></i></a>
+                    <a href="<%=request.getContextPath()%>/Patient/delete?id=${patient.getPatientId()}" style="background-color: red"><i class="fas fa-trash-alt"></i></a>
                 </td>
                 </tr>
             </c:forEach>
@@ -51,7 +51,7 @@
 
         <div class="content-pad__info">
             <c:if test="${currentPage != 1}">
-                <a href="<%=request.getContextPath()%>/NguoiCachLy/view-list?page=${currentPage - 1}"> < </a>
+                <a href="<%=request.getContextPath()%>/Patient/view-list?page=${currentPage - 1}"> < </a>
             </c:if>
 
             <c:forEach begin="1" end="${noOfPages}" var="i">
@@ -60,12 +60,12 @@
                         <a href="">${i}</a>
                     </c:when>
                     <c:otherwise>
-                        <a href="<%=request.getContextPath()%>/NguoiCachLy/view-list?page=${i}"> ${i} </a>
+                        <a href="<%=request.getContextPath()%>/Patient/view-list?page=${i}"> ${i} </a>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
             <c:if test = "${currentPage lt noOfPages}">
-                <a href="<%=request.getContextPath()%>/NguoiCachLy/view-list?page=${currentPage+1}"> > </a>
+                <a href="<%=request.getContextPath()%>/Patient/view-list?page=${currentPage+1}"> > </a>
             </c:if>
         </div>
     </div>

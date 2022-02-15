@@ -8,7 +8,7 @@ public class Patient {
 
     private String patientName;
 
-    private Integer age;
+    private int age;
 
     private String passPort;
 
@@ -16,12 +16,12 @@ public class Patient {
 
     private String addree;
 
-    private Integer phoneNumber;
+    private int phoneNumber;
 
     private String region;
 
     private String suspicionLevel;
-
+    
     private Date timeIn;
 
     private Date timeOut;
@@ -33,7 +33,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Integer patientId, String patientName, Integer age, String passPort, String gender, String addree, Integer phoneNumber, String region, String suspicionLevel, Date timeIn, Date timeOut, Room phong, Area khuCachLy) {
+    public Patient(Integer patientId, String patientName, int age, String passPort, String gender, String addree, int phoneNumber, String region, String suspicionLevel, Date timeIn, Date timeOut, Room phong, Area khuCachLy) {
         this.patientId = patientId;
         this.patientName = patientName;
         this.age = age;
@@ -69,11 +69,11 @@ public class Patient {
         this.patientName = patientName;
     }
 
-    public Integer getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -101,11 +101,11 @@ public class Patient {
         this.addree = addree;
     }
 
-    public Integer getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

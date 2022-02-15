@@ -10,11 +10,16 @@ import java.util.Hashtable;
 import java.util.List;
 
 /**
- * Interface giao tiếp với cơ sở dữ liệu
- * @param <T> Kiểu dữ liệu
+ * Interface interact with database
+ * @param <T> Data Type
  */
 public interface DAO<T> {
 
+    /**
+     *
+     * @param sql query
+     * @return A List contains T
+     */
     List<T> parse(String sql);
     
     T get(int id);

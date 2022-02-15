@@ -10,8 +10,8 @@
         <div class="spacer"></div>
 
         <div class="form-group">
-            <label for="ten_dang_nhap" class="form-label">Tên đăng nhập</label>
-            <input id="ten_dang_nhap" class="form-control" name="ten_dang_nhap" type="text">
+            <label for="username" class="form-label">Tên đăng nhập</label>
+            <input id="username" class="form-control" name="username" type="text">
             <span class="form-message"></span>
         </div>
 
@@ -28,8 +28,8 @@
         </div>
         
          <div class="form-group">
-            <label for="mabenhnhan" class="form-label">Mã bệnh nhân</label>
-            <input id="mabenhnhan" class="form-control" name="mabenhnhan" type="text">
+            <label for="patientId" class="form-label">Mã bệnh nhân</label>
+            <input id="patientId" class="form-control" name="patientId" type="text">
             <span class="form-message"></span>
         </div>
         
@@ -50,7 +50,7 @@
         form: "#form-dk",
         errorSelector: '.form-message',
         rules: [
-            Validator.isRequired("#ten_dang_nhap"),
+            Validator.isRequired("#username"),
             Validator.minLength("#password", 6),
             Validator.isPhone("#phone"),
             Validator.isRequired("#fullname"),

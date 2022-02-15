@@ -6,9 +6,9 @@
 package controller.base;
 
 import dao.AccountDAO;
+import dao.NurseDAO;
 import dao.PatientDAO;
 import entity.Account;
-import entity.Area;
 import entity.Nurse;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -42,23 +42,24 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
-        String tenDN = request.getParameter("ten_dang_nhap");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         String passwordMd5 = md5(password);
-        AccountDAO taiKhoanDAO = new AccountDAO();
-        Account user = taiKhoanDAO.find(tenDN, passwordMd5);
-        if (user == null) {
+        AccountDAO accountDAO = new AccountDAO();
+        NurseDAO nurseDAO = new NurseDAO();
+        Account account = accountDAO.find(username, passwordMd5);
+        if (account == null) {
             Notification noti = new Notification("Error", "Tài khoản không đúng. Vui lòng kiểm tra lại.", "error");
             request.setAttribute("notify", noti);
             RequestDispatcher rt = request.getRequestDispatcher("login.jsp");
 
             rt.forward(request, response);
         } else {
-            PatientDAO ngDAO = new PatientDAO();
-            user.setPatient(ngDAO.getByAccountId(user.getAccountId()));
-            ss.setAttribute("userLogin", user);
-            if (user.getType().getIdLoaiTaiKhoan() == 2) {
-                Nurse nurse = taiKhoanDAO.getNurseByAccoutId(user.getAccountId());
+            PatientDAO patientDAO = new PatientDAO();
+            account.setPatient(patientDAO.getPatientByAccountId(account.getAccountId()));
+            ss.setAttribute("userLogin", account);
+            if (account.getType().getAccountTypeId() == 2) {
+                Nurse nurse = nurseDAO.get(account.getAccountId());
                 ss.setAttribute("nurse", nurse);
                 RequestDispatcher rt = request.getRequestDispatcher("home");
                 rt.forward(request, response);

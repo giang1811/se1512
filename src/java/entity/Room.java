@@ -14,14 +14,14 @@ public class Room  {
     
     private String note;
    
-    private Area khuCachLy;
+    private Area area;
 
-    public Area getKhuCachLy() {
-        return khuCachLy;
+    public Area getArea() {
+        return area;
     }
 
-    public void setKhuCachLy(Area khuCachLy) {
-        this.khuCachLy = khuCachLy;
+    public void setArea(Area area) {
+        this.area = area;
     }
 
     
@@ -33,7 +33,7 @@ public class Room  {
         this.roomName = roomName;
         this.badNumber = badNumber;
         this.note = note;
-        this.khuCachLy = khuCachLy;
+        this.area = khuCachLy;
     }
 
     public Integer getRoomId() {
@@ -70,7 +70,7 @@ public class Room  {
 
     @Override
     public String toString() {
-        return "Phong{" + "roomId=" + roomId + ", roomName=" + roomName + ", badNumber=" + badNumber + ", note=" + note + ", khuCachLy=" + khuCachLy + '}';
+        return "Phong{" + "roomId=" + roomId + ", roomName=" + roomName + ", badNumber=" + badNumber + ", note=" + note + ", khuCachLy=" + area + '}';
     }
 
     
