@@ -57,6 +57,10 @@ public class ReportDAO implements DAO<Report>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * Get List of Reports
+     * @return List of Reports order by descending create_date
+     */
     @Override
     public List<Report> getAll() {
         String sql = "select * from report order by create_date desc";

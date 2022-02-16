@@ -42,7 +42,7 @@ public class FeedBackServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet FeedBackServlet</title>");            
+            out.println("<title>Servlet FeedBackServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet FeedBackServlet at " + request.getContextPath() + "</h1>");
@@ -81,8 +81,8 @@ public class FeedBackServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String content = request.getParameter("report");
-        long millis=System.currentTimeMillis();  
-        java.sql.Date date=new java.sql.Date(millis); 
+        long millis = System.currentTimeMillis();
+        java.sql.Date date = new java.sql.Date(millis);
         Report report = new Report();
         report.setContent(content);
         report.setCreateDate(date);

@@ -1,4 +1,3 @@
-
 package controller.base;
 
 import dao.AreaDAO;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import utils.Configs;
 import utils.Notification;
 import static utils.Utils.md5;
-
 
 public class RegisterServlet extends HttpServlet {
 
@@ -42,56 +40,55 @@ public class RegisterServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
-        String tenDN = request.getParameter("ten_dang_nhap");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
         String fullName = request.getParameter("fullname");
-        String passwordBcr =  md5(password);
-        
-        String maBenhNhan = request.getParameter("mabenhnhan");
-      
-        int maBN = Integer.parseInt(maBenhNhan);
-      
-        
-        AccountDAO taiKhoanDAO = new AccountDAO();
-        Account user = taiKhoanDAO.find(tenDN);
-        
+        String passwordBcr = md5(password);
+
+        String patientId_str = request.getParameter("patientId");
+
+        int patientId = Integer.parseInt(patientId_str);
+
+        AccountDAO accountDAO = new AccountDAO();
+        Account user = accountDAO.find(username);
+
         if (user != null) {
             Notification noti = new Notification("Warning", "Tài khoản đã bị trùng.<br/> Vui lòng chọn tên tài khoản khác.", "error");
             request.setAttribute("notify", noti);
             RequestDispatcher rt = request.getRequestDispatcher("register.jsp");
             rt.forward(request, response);
         } else {
-            PatientDAO ngDAO = new PatientDAO();
-            AreaDAO khuCachLyDAO = new AreaDAO();
-            Patient nguoiCachLy = ngDAO.get(maBN);
-           
-            if(nguoiCachLy!=null){
-                    Account newUser = new Account();
-                    newUser.setUserName(tenDN);
-                    newUser.setPassword(passwordBcr);
-                    newUser.setType(new TypeAccount(3));
-                    newUser.setPatient(nguoiCachLy);
-                    newUser.setAvatar(Configs.IMG_PATH_AVATAR_DEFAULT);
-                    taiKhoanDAO.create(newUser);
-                    // set Session Login
-                    Account user2 = taiKhoanDAO.find(tenDN, passwordBcr);
-                    user2.setPatient(nguoiCachLy);
-                    Hashtable<String, String> my_dict = new Hashtable<>();
-                    my_dict.put("account_id", user2.getAccountId()+"");
-                    ngDAO.update(nguoiCachLy, my_dict);
-                    ss.setAttribute("userLogin", user2);
-                    Notification noti = new Notification("Success", "Xin chúc mừng bạn đã đăng ký thành công", "success");
-                    request.setAttribute("notify", noti);
-                    RequestDispatcher rt = request.getRequestDispatcher("home.jsp");
-                    rt.forward(request, response);
-           
-           }else{
-                 Notification noti = new Notification("Warning", "Bệnh nhân không tồn tại.<br/> Vui lòng nhập lại mã .", "error");
-                 request.setAttribute("notify", noti);
-                 RequestDispatcher rt = request.getRequestDispatcher("register.jsp");
-                 rt.forward(request, response);
+            PatientDAO patientDAO = new PatientDAO();
+            AreaDAO areaDAO = new AreaDAO();
+            Patient patient = patientDAO.get(patientId);
+
+            if (patient != null) {
+                Account newUser = new Account();
+                newUser.setUserName(username);
+                newUser.setPassword(passwordBcr);
+                newUser.setType(new TypeAccount(3));
+                newUser.setPatient(patient);
+                newUser.setAvatar(Configs.IMG_PATH_AVATAR_DEFAULT);
+                accountDAO.create(newUser);
+                // set Session Login
+                Account user2 = accountDAO.find(username, passwordBcr);
+                user2.setPatient(patient);
+                Hashtable<String, String> my_dict = new Hashtable<>();
+                my_dict.put("account_id", user2.getAccountId() + "");
+                patientDAO.update(patient, my_dict);
+                ss.setAttribute("userLogin", user2);
+                Notification noti = new Notification("Success", "Xin chúc mừng bạn đã đăng ký thành công", "success");
+                request.setAttribute("notify", noti);
+                RequestDispatcher rt = request.getRequestDispatcher("login.jsp");
+                rt.forward(request, response);
+
+            } else {
+                Notification noti = new Notification("Warning", "Bệnh nhân không tồn tại.<br/> Vui lòng nhập lại mã .", "error");
+                request.setAttribute("notify", noti);
+                RequestDispatcher rt = request.getRequestDispatcher("register.jsp");
+                rt.forward(request, response);
             }
-            
+
         }
     }
 

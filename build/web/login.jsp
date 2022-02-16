@@ -12,7 +12,7 @@
 
         <div class="form-group">
             <label for="ten_dang_nhap" class="form-label">Tên đăng nhập</label>
-            <input id="ten_dang_nhap" class="form-control" name="ten_dang_nhap" type="text" >
+            <input id="ten_dang_nhap" class="form-control" name="username" type="text" >
             <span class="form-message"></span>
         </div>
 
@@ -32,7 +32,7 @@
         form: "#form-dn",
         errorSelector: '.form-message',
         rules: [
-            Validator.isRequired("#ten_dang_nhap"),
+            Validator.isRequired("#username"),
             Validator.minLength("#password", 6),
         ]
     });

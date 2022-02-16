@@ -9,12 +9,28 @@
         <servlet-class>controller.base.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>home</servlet-name>
-        <servlet-class>controller.base.home</servlet-class>
+        <servlet-name>HomeServlet</servlet-name>
+        <servlet-class>controller.base.HomeServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>FeedBackServlet</servlet-name>
         <servlet-class>controller.base.FeedBackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewPatientServlet</servlet-name>
+        <servlet-class>controller.Patient.viewPatientServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>viewPatient</servlet-name>
+        <servlet-class>controller.Patient.viewPatient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewListPatient</servlet-name>
+        <servlet-class>controller.Patient.ViewListPatient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddPatient</servlet-name>
+        <servlet-class>controller.Patient.AddPatient</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -25,12 +41,20 @@
         <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>home</servlet-name>
+        <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FeedBackServlet</servlet-name>
         <url-pattern>/FeedBackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewListPatient</servlet-name>
+        <url-pattern>/Patient/view-list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPatient</servlet-name>
+        <url-pattern>/Patient/add</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -56,8 +80,9 @@
             <description>JSP configuration for the admin console
             </description>
             <url-pattern>/home.jsp</url-pattern>
-             <url-pattern>/feedback.jsp</url-pattern>
-             <url-pattern>/listfeedback.jsp</url-pattern>
+            <url-pattern>/feedback.jsp</url-pattern>
+            <url-pattern>/listfeedback.jsp</url-pattern>
+            <url-pattern>/Patient/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header2.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>

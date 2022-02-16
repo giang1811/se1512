@@ -28,8 +28,8 @@ public class TypeDAO implements DAO<TypeAccount> {
             ArrayList<TypeAccount> qq = new ArrayList<>();
             while (rs.next()) {
                 TypeAccount p = new TypeAccount();
-                p.setIdLoaiTaiKhoan(rs.getInt("account_type_id"));
-                p.setTenLoaiTaiKhoan(rs.getString("type_name"));
+                p.setAccountTypeId(rs.getInt("account_type_id"));
+                p.setAccountTypeName(rs.getString("type_name"));
                 qq.add(p);
             }
             return qq;
