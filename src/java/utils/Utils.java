@@ -39,4 +39,8 @@ public class Utils {
         Date date = new Date();
         return dateFormat.format(date);
     }
+    public static void main(String[] args) {
+        Utils utils = new Utils();
+        System.out.println(utils.DATE_FORMATER);
+    }
 }
