@@ -3,36 +3,36 @@ import java.util.Date;
 
 public class Patient {
   
-    private Integer patientId;
-   
+     private Integer patientId;
+
     private String patientName;
-  
+
     private Integer age;
-  
+
     private String passPort;
-   
+
     private String gender;
-   
+
     private String addree;
-   
+
     private Integer phoneNumber;
-    
+
     private String region;
-  
+
     private String suspicionLevel;
-  
+
     private Date timeIn;
-  
+
     private Date timeOut;
-   
-    private Room phong;
-    
-    private Area khuCachLy;
+
+    private Room room;
+
+    private Area area;
     
     public Patient() {
     }
 
-    public Patient(Integer patientId, String patientName, Integer age, String passPort, String gender, String addree, Integer phoneNumber, String region, String suspicionLevel, Date timeIn, Date timeOut, Room phong, Area khuCachLy) {
+    public Patient(Integer patientId, String patientName, Integer age, String passPort, String gender, String addree, Integer phoneNumber, String region, String suspicionLevel, Date timeIn, Date timeOut, Room room, Area area) {
         this.patientId = patientId;
         this.patientName = patientName;
         this.age = age;
@@ -44,12 +44,8 @@ public class Patient {
         this.suspicionLevel = suspicionLevel;
         this.timeIn = timeIn;
         this.timeOut = timeOut;
-        this.phong = phong;
-        this.khuCachLy = khuCachLy;
-    }
-
-    public Patient(Integer patientId) {
-        this.patientId = patientId;
+        this.room = room;
+        this.area = area;
     }
 
     public Integer getPatientId() {
@@ -140,25 +136,21 @@ public class Patient {
         this.timeOut = timeOut;
     }
 
-    public Room getPhong() {
-        return phong;
+    public Room getRoom() {
+        return room;
     }
 
-    public void setPhong(Room phong) {
-        this.phong = phong;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
-    public Area getKhuCachLy() {
-        return khuCachLy;
+    public Area getArea() {
+        return area;
     }
 
-    public void setKhuCachLy(Area khuCachLy) {
-        this.khuCachLy = khuCachLy;
+    public void setArea(Area area) {
+        this.area = area;
     }
 
-    @Override
-    public String toString() {
-        return "NguoiCachLy{" + "patientId=" + patientId + ", patientName=" + patientName + ", age=" + age + ", passPort=" + passPort + ", gender=" + gender + ", addree=" + addree + ", phoneNumber=" + phoneNumber + ", region=" + region + ", suspicionLevel=" + suspicionLevel + ", timeIn=" + timeIn + ", timeOut=" + timeOut + ", phong=" + phong + ", khuCachLy=" + khuCachLy + '}';
-    }
-
+    
 }

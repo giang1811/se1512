@@ -47,7 +47,7 @@
             <br/>
             <div class='header_two row'>
                 <div class="logo col-3">
-                    <a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/assets/img/logo.png"></a>
+                    <a href="<%=request.getContextPath()%>/index.jsp"><img src="<%=request.getContextPath()%>/assets/img/logo2.png"></a>
                 </div>
                 <% } else {%>
                 <li><div class="user-heading">
@@ -67,12 +67,12 @@
             <br/>
             <div class='header_two row'>
                 <div class="logo col-3">
-                    <a href="<%=request.getContextPath()%>/home"><img src="<%=request.getContextPath()%>/assets/img/logo.png"></a>
+                    <a href="<%=request.getContextPath()%>/home"><img src="<%=request.getContextPath()%>/assets/img/logo2.png"></a>
                 </div>
                 <% }%>
 
                 <div class='search col-7'>
-                    <form action ="" method="POST">
+                    <form action ="SearchPatient" method="POST">
                         <input type="text" class="search__text" placeholder="Nhập để tìm kiếm" id="key" name="key">
                         <button type="SUBMIT"><i class="fas fa-search"></i></button>
                     </form>

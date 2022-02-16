@@ -19,7 +19,11 @@
                     <td>${report.getId_report()}</td>
                     <td>${report.getContent()}</td>
                     <td>${report.getCreateDate()}</td>
-                 
+                    <td class="td-action">
+                    <a href="<%=request.getContextPath()%>/NguoiCachLy/view-detail"><i class="far fa-calendar-alt">detail</i></a>
+                    <a href="<%=request.getContextPath()%>/UpdateFeedBack?id=${report.getId_report()}"><i class="fas fa-pen">update</i></a>
+                    <a href="<%=request.getContextPath()%>/DeleteFeedBack?id=${report.getId_report()}" style="background-color: red"><i class="fas fa-trash-alt">delete</i></a>
+                    </td>
                 </tr>
             </c:forEach>
 

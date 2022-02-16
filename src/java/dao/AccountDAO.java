@@ -39,10 +39,13 @@ public class AccountDAO implements DAO<Account> {
             while (rs.next()) {
                 Account p = new Account();
                 p.setAccountId(rs.getInt("account_id"));
+                int accountId = rs.getInt("account_id");
                 p.setUserName(rs.getString("username"));
                 p.setPassword(rs.getString("password"));
                 int idLoaiTaiKhoan = rs.getInt("id_type");
+                p.setAvatar(rs.getString("avatar"));
                 p.setType(loaiTaiKhoanDAO.get(idLoaiTaiKhoan));
+                p.setPatient(nguoiCachLyDAO.getByAccountId(accountId));
                 qq.add(p);
             }
             return qq;
@@ -54,7 +57,10 @@ public class AccountDAO implements DAO<Account> {
 
     @Override
     public Account get(int id) {
-       return null;
+       String sql = "select * from account where account_id = " + id;
+        List<Account> qq = new ArrayList<>();
+        qq = parse(sql);
+        return (qq.isEmpty() ? null : qq.get(0));
     }
 
     @Override

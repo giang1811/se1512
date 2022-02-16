@@ -14,7 +14,23 @@
     </servlet>
     <servlet>
         <servlet-name>FeedBackServlet</servlet-name>
-        <servlet-class>controller.base.FeedBackServlet</servlet-class>
+        <servlet-class>feedback.FeedBackServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteFeedBack</servlet-name>
+        <servlet-class>feedback.DeleteFeedBack</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateFeedBack</servlet-name>
+        <servlet-class>feedback.UpdateFeedBack</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchPatient</servlet-name>
+        <servlet-class>controller.base.SearchPatient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAccount</servlet-name>
+        <servlet-class>controller.base.UpdateAccount</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -32,6 +48,22 @@
         <servlet-name>FeedBackServlet</servlet-name>
         <url-pattern>/FeedBackServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFeedBack</servlet-name>
+        <url-pattern>/DeleteFeedBack</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateFeedBack</servlet-name>
+        <url-pattern>/UpdateFeedBack</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchPatient</servlet-name>
+        <url-pattern>/SearchPatient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccount</servlet-name>
+        <url-pattern>/myaccount/UpdateAccount</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -47,6 +79,7 @@
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/login.jsp</url-pattern>
             <url-pattern>/register.jsp</url-pattern>
+            <url-pattern>/myaccount/accountDetail.jsp</url-pattern>
             <!-- và các trang khác -->
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
@@ -55,9 +88,12 @@
         <jsp-property-group>
             <description>JSP configuration for the admin console
             </description>
+            <url-pattern>/Patient/*</url-pattern>
             <url-pattern>/home.jsp</url-pattern>
-             <url-pattern>/feedback.jsp</url-pattern>
-             <url-pattern>/listfeedback.jsp</url-pattern>
+            <url-pattern>/feedback.jsp</url-pattern>
+            <url-pattern>/search.jsp</url-pattern>
+            <url-pattern>/listfeedback.jsp</url-pattern>
+            <url-pattern>/updatefeedback.jsp</url-pattern>
             <include-prelude>/WEB-INF/jspf/header2.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>

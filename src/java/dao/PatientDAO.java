@@ -43,9 +43,9 @@ public class PatientDAO implements DAO<Patient> {
                 p.setTimeIn(rs.getTimestamp("time_in"));
                 p.setTimeOut(rs.getTimestamp("time_out"));
                 int idPhong = rs.getInt("room_id");
-                p.setPhong(null);
+                p.setRoom(null);
                 int idKhuCachLy = rs.getInt("area_id");
-                p.setKhuCachLy(khuCachLyDAO.get(idKhuCachLy));
+                p.setArea(khuCachLyDAO.get(idKhuCachLy));
                 qq.add(p);
             }
             return qq;
@@ -114,7 +114,10 @@ public class PatientDAO implements DAO<Patient> {
 
     public List<Patient> SearchByKey(String key, int offset, int noOfRecords) {
         
-        return null;
+        String sql = "SELECT * from patient where full_name like '%" + key + "%'";
+        List<Patient> qq = new ArrayList<>();
+        qq = parse(sql);
+        return qq;
     }
 
 }

@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
             rt.forward(request, response);
         } else {
             PatientDAO ngDAO = new PatientDAO();
-           user.setPatient(ngDAO.getByAccountId(user.getAccountId()));
+            user.setPatient(ngDAO.getByAccountId(user.getAccountId()));
             ss.setAttribute("userLogin", user);
             RequestDispatcher rt = request.getRequestDispatcher("home");
             rt.forward(request, response);
