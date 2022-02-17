@@ -1,8 +1,4 @@
-<%-- 
-    Document   : ChangePassword
-    Created on : Apr 25, 2021, 1:50:30 PM
-    Author     : CHUNG
---%>
+
 
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link href="<%=request.getContextPath()%>/assets/css/accountDetail.css" rel="stylesheet">
@@ -11,7 +7,7 @@
     <div class="menu">
         <ul>
             <li><div><img class="menu-img" src="<%=request.getContextPath()%>/${initParam.imgPath}${userLogin.getAvatar()}"/></div>
-                <div style="margin-left: 24px;"><h3>${userLogin.getTenDangNhap()}</h3>
+                <div style="margin-left: 24px;"><h3>${userLogin.getUserName()}</h3>
                     <a href=""><i class="fas fa-pen"></i>Sửa hồ sơ</a>
                 </div>
             <li class="spacer"></li>

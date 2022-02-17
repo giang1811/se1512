@@ -32,6 +32,10 @@
         <servlet-name>UpdateAccount</servlet-name>
         <servlet-class>controller.base.UpdateAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>controller.base.ChangePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -64,6 +68,10 @@
         <servlet-name>UpdateAccount</servlet-name>
         <url-pattern>/myaccount/UpdateAccount</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/myaccount/ChangePassword</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -80,6 +88,7 @@
             <url-pattern>/login.jsp</url-pattern>
             <url-pattern>/register.jsp</url-pattern>
             <url-pattern>/myaccount/accountDetail.jsp</url-pattern>
+            <url-pattern>/myaccount/ChangePassword.jsp</url-pattern>
             <!-- và các trang khác -->
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
