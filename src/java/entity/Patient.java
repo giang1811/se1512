@@ -10,11 +10,11 @@ public class Patient {
 
     private int age;
 
-    private String passPort;
+    private String passport;
 
     private String gender;
 
-    private String addree;
+    private String address;
 
     private int phoneNumber;
 
@@ -33,13 +33,13 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Integer patientId, String patientName, int age, String passPort, String gender, String addree, int phoneNumber, String region, String suspicionLevel, Date timeIn, Date timeOut, Room phong, Area khuCachLy) {
+    public Patient(Integer patientId, String patientName, int age, String passPort, String gender, String address, int phoneNumber, String region, String suspicionLevel, Date timeIn, Date timeOut, Room phong, Area khuCachLy) {
         this.patientId = patientId;
         this.patientName = patientName;
         this.age = age;
-        this.passPort = passPort;
+        this.passport = passPort;
         this.gender = gender;
-        this.addree = addree;
+        this.address = address;
         this.phoneNumber = phoneNumber;
         this.region = region;
         this.suspicionLevel = suspicionLevel;
@@ -77,12 +77,12 @@ public class Patient {
         this.age = age;
     }
 
-    public String getPassPort() {
-        return passPort;
+    public String getPassport() {
+        return passport;
     }
 
-    public void setPassPort(String passPort) {
-        this.passPort = passPort;
+    public void setPassport(String passport) {
+        this.passport = passport;
     }
 
     public String getGender() {
@@ -93,12 +93,12 @@ public class Patient {
         this.gender = gender;
     }
 
-    public String getAddree() {
-        return addree;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddree(String addree) {
-        this.addree = addree;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getPhoneNumber() {
@@ -162,9 +162,9 @@ public class Patient {
         String result = "Patient ID = " + patientId + "\n"
                 + "Patient Name = " + patientName + "\n"
                 + "Patient Phone = " + age + "\n"
-                + "Patient Fullname = " + passPort + "\n"
+                + "Patient Fullname = " + passport + "\n"
                 + "Patient Account_Id = " + gender + "\n"
-                + "Patient Address = " + addree + "\n"
+                + "Patient Address = " + address + "\n"
                 + "Patient Phone Number = " + phoneNumber + "\n"
                 + "Patient Region = " + region + "\n"
                 + "Patient Suspicion Level = " + suspicionLevel + "\n"

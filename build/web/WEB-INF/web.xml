@@ -32,6 +32,26 @@
         <servlet-name>AddPatient</servlet-name>
         <servlet-class>controller.Patient.AddPatient</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletePatient</servlet-name>
+        <servlet-class>controller.Patient.DeletePatient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePatient</servlet-name>
+        <servlet-class>controller.Patient.UpdatePatient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDetailPatient</servlet-name>
+        <servlet-class>controller.Patient.ViewDetailPatient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddTestPatient</servlet-name>
+        <servlet-class>controller.Patient.AddTestPatient</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <servlet-class>controller.base.ForgotPasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -56,6 +76,26 @@
         <servlet-name>AddPatient</servlet-name>
         <url-pattern>/Patient/add</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePatient</servlet-name>
+        <url-pattern>/Patient/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePatient</servlet-name>
+        <url-pattern>/Patient/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailPatient</servlet-name>
+        <url-pattern>/Patient/view-detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddTestPatient</servlet-name>
+        <url-pattern>/Patient/add-test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -70,6 +110,7 @@
             <description>JSP configuration for the system </description>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/login.jsp</url-pattern>
+            <url-pattern>/forgot_password.jsp</url-pattern>
             <url-pattern>/register.jsp</url-pattern>
             <!-- và các trang khác -->
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>

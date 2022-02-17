@@ -82,8 +82,8 @@ public class AddPatient extends HttpServlet {
         Patient patient = new Patient();
         patient.setPatientName(fullName);
         patient.setSuspicionLevel(suspicionLevel);
-        patient.setPassPort(passport);
-        patient.setAddree(address);
+        patient.setPassport(passport);
+        patient.setAddress(address);
         patient.setGender(gender);
         patient.setRoom(phong);
         patient.setRegion(region);

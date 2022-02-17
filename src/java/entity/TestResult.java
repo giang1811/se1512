@@ -5,22 +5,18 @@
  */
 package entity;
 
-import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
 public class TestResult{
 
     private Integer testResultId;
    
-    private String testType;
+    private String testName;
    
     private String result;
    
-    private Date testTime;
+    private Date createDate;
   
-    private Patient ngCachLy;
+    private Patient patient;
 
     public TestResult() {
     }
@@ -29,12 +25,11 @@ public class TestResult{
         this.testResultId = testResultId;
     }
 
-    public TestResult(Integer testResultId, String testType, String result, Date testTime, Patient ngCachLy) {
-        this.testResultId = testResultId;
-        this.testType = testType;
+    public TestResult(String testType, String result, Date testTime, Patient patient) {
+        this.testName = testType;
         this.result = result;
-        this.testTime = testTime;
-        this.ngCachLy = ngCachLy;
+        this.createDate = testTime;
+        this.patient = patient;
     }
 
     public Integer getTestResultId() {
@@ -45,12 +40,12 @@ public class TestResult{
         this.testResultId = testResultId;
     }
 
-    public String getTestType() {
-        return testType;
+    public String getTestName() {
+        return testName;
     }
 
-    public void setTestType(String testType) {
-        this.testType = testType;
+    public void setTestName(String testName) {
+        this.testName = testName;
     }
 
     public String getResult() {
@@ -61,24 +56,24 @@ public class TestResult{
         this.result = result;
     }
 
-    public Date getTestTime() {
-        return testTime;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setTestTime(Date testTime) {
-        this.testTime = testTime;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public Patient getNgCachLy() {
-        return ngCachLy;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setNgCachLy(Patient ngCachLy) {
-        this.ngCachLy = ngCachLy;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
     @Override
     public String toString() {
-        return "KqXetNghiem{" + "testResultId=" + testResultId + ", testType=" + testType + ", result=" + result + ", testTime=" + testTime + ", ngCachLy=" + ngCachLy + '}';
+        return "KqXetNghiem{" + "testResultId=" + testResultId + ", testType=" + testName + ", result=" + result + ", testTime=" + createDate + ", ngCachLy=" + patient + '}';
     }
 }
