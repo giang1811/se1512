@@ -15,7 +15,7 @@
             <input id="ten_dang_nhap" class="form-control" name="username" type="text" >
             <span class="form-message"></span>
         </div>
-
+<!--hello-->
         <div class="form-group">
             <label for="password" class="form-label">Mật khẩu</label>
             <input id="password" class="form-control" name="password" type="password" >
