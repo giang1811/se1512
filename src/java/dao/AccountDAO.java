@@ -50,12 +50,14 @@ public class AccountDAO implements DAO<Account> {
             while (rs.next()) {
                 Account p = new Account();
                 p.setAccountId(rs.getInt("account_id"));
+                int accountId = rs.getInt("account_id");
                 p.setUserName(rs.getString("username"));
                 p.setPassword(rs.getString("password"));
                 int accountTypeId = rs.getInt("id_type");
                 p.setAvatar(rs.getString("avatar"));
                 p.setEmail(rs.getString("email"));
                 p.setType(accountTypeDAO.get(accountTypeId));
+                 p.setPatient(patientDAO.getByAccountId(accountId));
                 qq.add(p);
             }
             return qq;
@@ -149,7 +151,28 @@ public class AccountDAO implements DAO<Account> {
 
     @Override
     public void update(Account t, Hashtable<String, String> my_dict) {
-
+        String sql_update = "Update account set ";
+        if (!my_dict.isEmpty()) {
+            try (
+                    PreparedStatement prep = conn.prepareStatement(sql_update);) {
+                String change = "";
+                for (String key : my_dict.keySet()) {
+                    String value = my_dict.get(key);
+                    try {
+                        int values = Integer.parseInt(value);
+                        change += key + " = " + values + ",";
+                    } catch (Exception e) {
+                        change += key + " = '" + value + "',";
+                    }
+                }
+                change = change.substring(0, change.length() - 1);
+                sql_update += change + " where account_id = " + t.getAccountId();
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate(sql_update);
+            } catch (SQLException x) {
+                x.printStackTrace();
+            }
+        }
     }
 
     public void updateForgot(Account t) {

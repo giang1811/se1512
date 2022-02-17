@@ -64,8 +64,11 @@ public class LoginServlet extends HttpServlet {
                 RequestDispatcher rt = request.getRequestDispatcher("home");
                 rt.forward(request, response);
             } else {
-                RequestDispatcher rt = request.getRequestDispatcher("home");
-                rt.forward(request, response);
+            PatientDAO ngDAO = new PatientDAO();
+            account .setPatient(ngDAO.getByAccountId(account .getAccountId()));
+            ss.setAttribute("userLogin", account );
+            RequestDispatcher rt = request.getRequestDispatcher("home");
+            rt.forward(request, response);
             }
         }
     }

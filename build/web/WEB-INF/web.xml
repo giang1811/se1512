@@ -9,12 +9,20 @@
         <servlet-class>controller.base.RegisterServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>controller.base.HomeServlet</servlet-class>
+        <servlet-name>FeedBackServlet</servlet-name>
+        <servlet-class>feedback.FeedBackServlet</servlet-class>
+    </servlet>
+      <servlet>
+        <servlet-name>DeleteFeedBack</servlet-name>
+        <servlet-class>feedback.DeleteFeedBack</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FeedBackServlet</servlet-name>
-        <servlet-class>controller.base.FeedBackServlet</servlet-class>
+        <servlet-name>UpdateFeedBack</servlet-name>
+        <servlet-class>feedback.UpdateFeedBack</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchPatient</servlet-name>
+        <servlet-class>controller.base.SearchPatient</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>viewPatientServlet</servlet-name>
@@ -52,6 +60,18 @@
         <servlet-name>ForgotPasswordServlet</servlet-name>
         <servlet-class>controller.base.ForgotPasswordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateAccount</servlet-name>
+        <servlet-class>controller.base.UpdateAccount</servlet-class>
+    </servlet>
+     <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>controller.base.ChangePassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>home</servlet-name>
+        <servlet-class>controller.base.home</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -61,12 +81,20 @@
         <url-pattern>/RegisterServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/home</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>FeedBackServlet</servlet-name>
         <url-pattern>/FeedBackServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteFeedBack</servlet-name>
+        <url-pattern>/DeleteFeedBack</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateFeedBack</servlet-name>
+        <url-pattern>/UpdateFeedBack</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>SearchPatient</servlet-name>
+        <url-pattern>/SearchPatient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ViewListPatient</servlet-name>
@@ -96,6 +124,18 @@
         <servlet-name>ForgotPasswordServlet</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>home</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccount</servlet-name>
+        <url-pattern>/myaccount/UpdateAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/myaccount/ChangePassword</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -108,6 +148,8 @@
         </jsp-property-group>
         <jsp-property-group>
             <description>JSP configuration for the system </description>
+             <url-pattern>/myaccount/accountDetail.jsp</url-pattern>
+             <url-pattern>/myaccount/ChangePassword.jsp</url-pattern>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/login.jsp</url-pattern>
             <url-pattern>/forgot_password.jsp</url-pattern>
@@ -121,8 +163,10 @@
             <description>JSP configuration for the admin console
             </description>
             <url-pattern>/home.jsp</url-pattern>
+             <url-pattern>/search.jsp</url-pattern>
             <url-pattern>/feedback.jsp</url-pattern>
             <url-pattern>/listfeedback.jsp</url-pattern>
+            <url-pattern>/updatefeedback.jsp</url-pattern>
             <url-pattern>/Patient/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header2.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>

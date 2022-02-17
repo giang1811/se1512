@@ -56,7 +56,8 @@
                         <span>${userLogin.getUserName()}</span>
                         <div class="user-info">
                             <ul class="user-info__list">
-                                <li class="user-info__item"><a href="">Tài khoản của tôi</a></li>
+                                <li class="user-info__item"><a href="<%=request.getContextPath()%>/myaccount/accountDetail.jsp">Tài khoản của tôi</a></li>
+                                <li class="user-info__item"><a href="<%=request.getContextPath()%>/myaccount/ChangePassword.jsp">Thay đổi mật khẩu</a></li>
                             </ul>
                         </div>
                     </div>                   
@@ -72,7 +73,7 @@
                 <% }%>
 
                 <div class='search col-7'>
-                    <form action ="" method="POST">
+                    <form action ="SearchPatient" method="POST">
                         <input type="text" class="search__text" placeholder="Nhập để tìm kiếm" id="key" name="key">
                         <button type="SUBMIT"><i class="fas fa-search"></i></button>
                     </form>

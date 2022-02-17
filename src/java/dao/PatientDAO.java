@@ -101,7 +101,12 @@ public class PatientDAO implements DAO<Patient> {
         qq = parse(sql);
         return (qq.isEmpty() ? null : qq.get(0));
     }
-    
+    public Patient getByAccountId(int id) {
+        String sql = "SELECT * from patient where account_id = " + id;
+        List<Patient> qq = new ArrayList<>();
+        qq = parse(sql);
+        return (qq.isEmpty() ? null : qq.get(0));
+    }
     @Override
     public List<Patient> getAll() {
         String sql = "SELECT * from patient";
@@ -232,7 +237,10 @@ public class PatientDAO implements DAO<Patient> {
     
     public List<Patient> SearchByKey(String key, int offset, int noOfRecords) {
         
-        return null;
+        String sql = "SELECT * from patient where full_name like '%" + key + "%'";
+        List<Patient> qq = new ArrayList<>();
+        qq = parse(sql);
+        return qq;
     }
     
     public static void main(String[] args) throws ParseException {

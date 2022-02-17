@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class ReportDAO implements DAO<Report>{
 
-    private final String SQL_INSERT = "INSERT INTO [dbo].[report]\n" +
+     private final String SQL_INSERT = "INSERT INTO [dbo].[report]\n" +
 "           ([content]\n" +
 "           ,[create_date]\n" +
 "           ,[id_patient])\n" +
@@ -54,13 +54,12 @@ public class ReportDAO implements DAO<Report>{
 
     @Override
     public Report get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "select * from report where id_report = " + id;
+        List<Report> qq = new ArrayList<>();
+        qq = parse(sql);
+        return (qq.isEmpty() ? null : qq.get(0));
     }
 
-    /**
-     * Get List of Reports
-     * @return List of Reports order by descending create_date
-     */
     @Override
     public List<Report> getAll() {
         String sql = "select * from report order by create_date desc";
@@ -69,6 +68,13 @@ public class ReportDAO implements DAO<Report>{
         return qq;
     }
 
+    public List<Report> getAllById(int patientId) {
+        String sql = "select * from report where id_patient = " + patientId + " order by create_date desc";
+        List<Report> qq = new ArrayList<>();
+        qq = parse(sql);
+        return qq;
+    }
+    
     @Override
     public void create(Report t) {
         try (
@@ -84,12 +90,38 @@ public class ReportDAO implements DAO<Report>{
 
     @Override
     public void update(Report t, Hashtable<String, String> my_dict) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (!my_dict.isEmpty()) {
+            String sql_update = "Update report set ";
+            try (
+                    PreparedStatement prep = conn.prepareStatement(sql_update);) {
+                String change = "";
+                for (String key : my_dict.keySet()) {
+                    String value = my_dict.get(key);
+                    try {
+                        int values = Integer.parseInt(value);
+                        change += key + " = " + values + ",";
+                    } catch (Exception e) {
+                        change += key + " = '" + value + "',";
+                    }
+                }
+                change = change.substring(0, change.length() - 1);
+                sql_update += change + " where id_report = " + t.getId_report();
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate(sql_update);
+            } catch (SQLException x) {
+                x.printStackTrace();
+            }
+        }
     }
 
     @Override
     public void delete(Report t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         try {
+            String sql = "delete from report where id_report = " + t.getId_report();
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sql);
+        } catch (SQLException x) {
+            x.printStackTrace();
+        }
     }
-  
 }
