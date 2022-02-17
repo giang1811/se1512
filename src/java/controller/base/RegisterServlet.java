@@ -7,6 +7,7 @@ import entity.TypeAccount;
 import entity.Patient;
 import entity.Account;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Hashtable;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,8 +44,9 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String fullName = request.getParameter("fullname");
+        String email = request.getParameter("email");
         String passwordBcr = md5(password);
-
+        PrintWriter out = response.getWriter();
         String patientId_str = request.getParameter("patientId");
 
         int patientId = Integer.parseInt(patientId_str);
@@ -69,9 +71,10 @@ public class RegisterServlet extends HttpServlet {
                 newUser.setType(new TypeAccount(3));
                 newUser.setPatient(patient);
                 newUser.setAvatar(Configs.IMG_PATH_AVATAR_DEFAULT);
+                newUser.setEmail(email);
                 accountDAO.create(newUser);
                 // set Session Login
-                Account user2 = accountDAO.find(username, passwordBcr);
+                Account user2 = accountDAO.findByUsernamePassword(username, passwordBcr);
                 user2.setPatient(patient);
                 Hashtable<String, String> my_dict = new Hashtable<>();
                 my_dict.put("account_id", user2.getAccountId() + "");

@@ -48,6 +48,10 @@
         <servlet-name>AddTestPatient</servlet-name>
         <servlet-class>controller.Patient.AddTestPatient</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <servlet-class>controller.base.ForgotPasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -88,6 +92,10 @@
         <servlet-name>AddTestPatient</servlet-name>
         <url-pattern>/Patient/add-test</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPasswordServlet</servlet-name>
+        <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -102,6 +110,7 @@
             <description>JSP configuration for the system </description>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/login.jsp</url-pattern>
+            <url-pattern>/forgot_password.jsp</url-pattern>
             <url-pattern>/register.jsp</url-pattern>
             <!-- và các trang khác -->
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>

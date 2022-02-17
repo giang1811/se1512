@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
         String passwordMd5 = md5(password);
         AccountDAO accountDAO = new AccountDAO();
         NurseDAO nurseDAO = new NurseDAO();
-        Account account = accountDAO.find(username, passwordMd5);
+        Account account = accountDAO.findByUsernamePassword(username, passwordMd5);
         if (account == null) {
             Notification noti = new Notification("Error", "Tài khoản không đúng. Vui lòng kiểm tra lại.", "error");
             request.setAttribute("notify", noti);

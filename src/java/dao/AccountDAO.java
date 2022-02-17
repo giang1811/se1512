@@ -7,6 +7,7 @@ package dao;
 
 import entity.Account;
 import entity.Nurse;
+import entity.TypeAccount;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,21 +16,30 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import utils.Utils;
 
 public class AccountDAO implements DAO<Account> {
 
-    private final String SQL_INSERT = "INSERT INTO [dbo].[account]\n"
-            + "           ([id_type]\n"
-            + "           ,[username]\n"
-            + "           ,[password]\n"
-            + "           ,[avatar])\n"
-            + "     VALUES\n"
-            + "           (?,?,?,?)";
+    private final String SQL_INSERT = "INSERT INTO dbo.account\n"
+            + "(\n"
+            + "    id_type,\n"
+            + "    username,\n"
+            + "    password,\n"
+            + "    avatar,\n"
+            + "    email\n"
+            + ")\n"
+            + "VALUES\n"
+            + "(?,?,?,?,?)";
 
-    Connection conn = DBcontext.getConnection();
-    TypeDAO accountTypeDAO = new TypeDAO();
-    PatientDAO patientDAO = new PatientDAO();
-    AreaDAO areaDAO = new AreaDAO();
+    private final Connection conn = DBcontext.getConnection();
+    private final TypeDAO accountTypeDAO = new TypeDAO();
+    private final PatientDAO patientDAO = new PatientDAO();
+    private final AreaDAO areaDAO = new AreaDAO();
+    private final Utils utils = new Utils();
+    public final String NEW_PASSWORD = utils.randomPassword(10);
+    private final String PASSWORD_HASH = utils.md5(NEW_PASSWORD);
 
     @Override
     public List<Account> parse(String sql) {
@@ -44,6 +54,7 @@ public class AccountDAO implements DAO<Account> {
                 p.setPassword(rs.getString("password"));
                 int accountTypeId = rs.getInt("id_type");
                 p.setAvatar(rs.getString("avatar"));
+                p.setEmail(rs.getString("email"));
                 p.setType(accountTypeDAO.get(accountTypeId));
                 qq.add(p);
             }
@@ -56,22 +67,32 @@ public class AccountDAO implements DAO<Account> {
 
     @Override
     public Account get(int id) {
-        return null;
+        String sql = "Select * from account where account_id = " + id;
+        List<Account> qq = new ArrayList<>();
+        qq = parse(sql);
+        return (qq.isEmpty() ? null : qq.get(0));
     }
 
     @Override
     public List<Account> getAll() {
-
         return null;
+    }
+
+    public Account find(String username) {
+        String sql = "select * from account where username = '" + username + "'";
+        List<Account> qq = new ArrayList<>();
+        qq = parse(sql);
+        return (qq.isEmpty() ? null : qq.get(0));
     }
 
     /**
      * Find account by username and password
+     *
      * @param username
      * @param password
      * @return Account
      */
-    public Account find(String username, String password) {
+    public Account findByUsernamePassword(String username, String password) {
         String sql = "select * from account where username = '" + username + "' and password = '" + password + "';";
         List<Account> qq = new ArrayList<>();
         qq = parse(sql);
@@ -80,11 +101,13 @@ public class AccountDAO implements DAO<Account> {
 
     /**
      * Find Account by username
-     * @param patientName
+     *
+     * @param username
+     * @param email
      * @return Account
      */
-    public Account find(String patientName) {
-        String sql = "select * from account where username = '" + patientName + "';";
+    public Account findByUsernameEmail(String username, String email) {
+        String sql = "select * from account where username = '" + username + "' and email ='" + email + "'";;
         List<Account> qq = new ArrayList<>();
         qq = parse(sql);
         return (qq.isEmpty() ? null : qq.get(0));
@@ -92,6 +115,7 @@ public class AccountDAO implements DAO<Account> {
 
     /**
      * Find Account by patient_id
+     *
      * @param patientId
      * @return Account
      */
@@ -104,19 +128,19 @@ public class AccountDAO implements DAO<Account> {
 
     /**
      * Get Nurse by account_id
+     *
      * @param account_id
      * @return Nurse
      */
-   
-
     @Override
     public void create(Account t) {
         try (
-            PreparedStatement prep = conn.prepareStatement(SQL_INSERT)) {
+                PreparedStatement prep = conn.prepareStatement(SQL_INSERT)) {
             prep.setInt(1, t.getType().getAccountTypeId());
             prep.setString(2, t.getUserName());
             prep.setString(3, t.getPassword());
             prep.setString(4, t.getAvatar());
+            prep.setString(5, t.getEmail());
             prep.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -128,12 +152,25 @@ public class AccountDAO implements DAO<Account> {
 
     }
 
+    public void updateForgot(Account t) {
+        try {
+            String sql = "UPDATE dbo.account SET password = '" + PASSWORD_HASH + "' WHERE username = '" + t.getUserName() + "'";
+            PreparedStatement pt = conn.prepareStatement(sql);
+            pt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @Override
     public void delete(Account t) {
 
     }
-    
+
     public static void main(String[] args) {
         AccountDAO dao = new AccountDAO();
+        Account a = dao.find("longcute1234");
+        dao.updateForgot(a);
+        System.out.println(dao.NEW_PASSWORD);
     }
 }

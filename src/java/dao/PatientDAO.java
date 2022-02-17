@@ -237,9 +237,7 @@ public class PatientDAO implements DAO<Patient> {
     
     public static void main(String[] args) throws ParseException {
         PatientDAO dao = new PatientDAO();
-        List<Patient> list = dao.getAll();
-        for (Patient patient : list) {
-            System.out.println(patient.toString());
-        }
+        Patient p = dao.get(7);
+        dao.delete(p);
     }
 }
