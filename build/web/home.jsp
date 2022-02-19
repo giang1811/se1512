@@ -22,7 +22,7 @@
                     <li>Tháng này <span>10</span></li>
                 </ul>
             </div>
-            
+            <!--hello-->
             
             <div class="report__info-class report__info-class__orange">
                 <label class="report-label"><i class="fas fa-bed"></i> Sức chứa</label>
