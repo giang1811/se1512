@@ -14,19 +14,6 @@
     <body>
         <h1>Hello World!</h1>
         <div>
-            Hello, Lưu Hoàng Hải
-            <br>
-            <i>** This is an automated message -- please do not reply as you will not receive a response. **</i>
-            <br>
-            This message is in response to your request to reset your account password. Please click the link below and follow the instructions to change your password.
-            <br>
-            Your password is: <i style="font-style: italic; color: red;">7@o&5Lv0</i>
-            <br>
-            https://chgpwd.fpt.edu.vn
-            <br>
-            Thank you.
-            <br>
-            FPT University.
 
         </div>
     </body>
