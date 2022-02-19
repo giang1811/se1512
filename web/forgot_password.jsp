@@ -21,23 +21,30 @@
             <input id="email" class="form-control" name="email" type="text" >
             <span class="form-message"></span>
         </div>
-        <button onclick="myFunction()" class="form-submit">Tiếp theo</button>
+        <button id="forgot-alert" class="form-submit">Tiếp theo</button>
+        <script>
+            document.getElementById('forgot-alert').addEventListener('click', function () {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Mật khẩu mới của bạn đã thay đổi. Kiểm tra email của bạn để thấy sự thay đổi',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            })
+        </script>
     </form>
 </div>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="assets/js/validator.js"></script>
 <script>
-    Validator({
-        form: "#form-dn",
-        errorSelector: '.form-message',
-        rules: [
-            Validator.isRequired("#username"),
-            Validator.minLength("#email", 6),
-        ]
-    });
+            Validator({
+                form: "#form-dn",
+                errorSelector: '.form-message',
+                rules: [
+                    Validator.isRequired("#username"),
+                    Validator.minLength("#email", 6),
+                ]
+            });
 </script>
-<script>
-function myFunction() {
-  alert("Hello\nHow are you?");
-}
-</script>
+

@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> CoviC </title>
+        <title> IsolatedMS </title>
         <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
         <meta name ="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,8 @@
         <link rel="stylesheet" type="text/css" media="screen" href="<%=request.getContextPath()%>/assets/css/base/header2.css">
         <link rel="stylesheet" type="text/css" media="screen" href="<%=request.getContextPath()%>/assets/css/base/toast.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" integrity="sha512-yFjZbTYRCJodnuyGlsKamNE/LlEaEAxSUDe5+u61mV8zzqJVFOH7TnULE2/PP/l5vKWpUNnF4VGVkXh3MjgLsg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>   
-
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
     </head>
     <body>
         <header>
@@ -67,7 +68,7 @@
             <br/>
             <div class='header_two row'>
                 <div class="logo col-3">
-                    <a href=""><img src="<%=request.getContextPath()%>/assets/img/logo.png"></a>
+                    <a href="home"><img src="<%=request.getContextPath()%>/assets/img/logo.png"></a>
                 </div>
                 <% }%>
 
@@ -110,7 +111,7 @@
                             acocuntTypeId = 0;
                         }
 
-                        if (acocuntTypeId != 3) {      //Manager or Staff
+    if (acocuntTypeId != 3) {      //Manager or Staff
                     %>
                     <li><a class="sidebar-li" href="<%=request.getContextPath()%>/Patient/view-list"><i class="fas fa-user sidebar-icon"></i>
                             <span class="sidebar-info">Người cách ly</span>

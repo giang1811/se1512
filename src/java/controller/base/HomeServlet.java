@@ -1,17 +1,19 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package controller.base;
 
-
 import dao.AccountDAO;
+import dao.PatientDAO;
 import entity.Area;
 import entity.Account;
 import entity.Nurse;
+import entity.Patient;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import utils.Notification;
 import static utils.Utils.md5;
-
 
 public class HomeServlet extends HttpServlet {
 
@@ -38,9 +39,21 @@ public class HomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
-        Account account = (Account)ss.getAttribute("userLogin");
+        Account account = (Account) ss.getAttribute("userLogin");
+        PrintWriter out = response.getWriter();
         Notification noti = null;
         RequestDispatcher rt = null;
+        PatientDAO patientDAO = new PatientDAO();
+        // New patients in the following days
+        String[] dates = {"12/02/2022", "13/02/2022", "14/02/2022", "15/02/2022", "16/02/2022", "17/02/2022", "18/02/2022"};
+        int[] arrPatient = new int[dates.length];
+        int newPatientWeek = patientDAO.getPatientsInDuration(7);
+        for (int i = 0; i < dates.length; i++) {
+            arrPatient[i] = patientDAO.getNuPatientsInDate(dates[i]);
+        }
+        request.setAttribute("newWeek", newPatientWeek);
+        request.setAttribute("dates", dates);
+        request.setAttribute("new", arrPatient);
         int id = account.getType().getAccountTypeId();
         switch (id){
             case 1: //manager 
@@ -70,7 +83,6 @@ public class HomeServlet extends HttpServlet {
             default :
                 
         } 
-            
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

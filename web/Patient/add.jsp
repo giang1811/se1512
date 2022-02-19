@@ -12,12 +12,12 @@
         <div class="spacer2"></div>
     </div>
 
-    <% 
-    HttpSession ss = request.getSession();
-    Nurse nurse = (Nurse)ss.getAttribute("nurse");
-    int area_id = nurse.getId_area();
-    RoomDAO phongDAO = new RoomDAO();
-    List<Room> phongs = phongDAO.getAllInArea(area_id);
+    <%
+        HttpSession ss = request.getSession();
+        Nurse nurse = (Nurse) ss.getAttribute("nurse");
+        int area_id = nurse.getId_area();
+        RoomDAO phongDAO = new RoomDAO();
+        List<Room> phongs = phongDAO.getAllInArea(area_id);
     %>
 
     <div class="form-container">
@@ -74,9 +74,9 @@
             <div class="form-group">
                 <label for="roomName" class="form-label">Xếp vào phòng số</label>
                 <select name="roomName" id="roomName" class="form-control" required>
-                    <% for(Room phong : phongs){ %>
+                    <% for (Room phong : phongs) {%>
                     <option value="<%=phong.getRoomId()%>"><%=phong.getRoomName()%></option>
-                    <% } %>
+                    <% }%>
                 </select>
             </div>
             <button type = "submit" class="form-submit"><i class="far fa-save"></i><span>Lưu</span></button>

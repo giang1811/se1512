@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.Notification;
 import utils.Utils;
+
 /**
  *
  * @author hoang
@@ -38,7 +40,7 @@ public class ForgotPasswordServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ForgotPasswordServlet</title>");            
+            out.println("<title>Servlet ForgotPasswordServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ForgotPasswordServlet at " + request.getContextPath() + "</h1>");
@@ -86,6 +88,8 @@ public class ForgotPasswordServlet extends HttpServlet {
         String password = accountDAO.NEW_PASSWORD;
         String message = utils.sendMessage(username, password);
         utils.send(email, utils.SUBJECT, message, utils.EMAIL, utils.PASSWORD);
+        Notification noti = new Notification("Cảm ơn", "Mật khẩu mới đã được gửi vào trong email của bạn, bạn hãy check mail và sau đó đổi lại mật khẩu nhé.", "success");
+        request.setAttribute("notify", noti);
         response.sendRedirect("login.jsp");
     }
 
