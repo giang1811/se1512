@@ -62,7 +62,7 @@ public class TestResultDAO implements DAO<TestResult> {
     }
     
     public List<TestResult> findTestResultByPatientId(int id) {
-        String sql = "select * from test_result where test_result_id = " + id;
+        String sql = "select * from test_result where patient_id = " + id;
         List<TestResult> qq = new ArrayList<>();
         qq = parse(sql);
         return qq;

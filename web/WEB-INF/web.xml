@@ -12,7 +12,7 @@
         <servlet-name>FeedBackServlet</servlet-name>
         <servlet-class>feedback.FeedBackServlet</servlet-class>
     </servlet>
-      <servlet>
+    <servlet>
         <servlet-name>DeleteFeedBack</servlet-name>
         <servlet-class>feedback.DeleteFeedBack</servlet-class>
     </servlet>
@@ -64,13 +64,17 @@
         <servlet-name>UpdateAccount</servlet-name>
         <servlet-class>controller.base.UpdateAccount</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>controller.base.ChangePassword</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>home</servlet-name>
         <servlet-class>controller.base.home</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DischargePatient</servlet-name>
+        <servlet-class>controller.Patient.DischargePatient</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -92,7 +96,7 @@
         <servlet-name>UpdateFeedBack</servlet-name>
         <url-pattern>/UpdateFeedBack</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SearchPatient</servlet-name>
         <url-pattern>/SearchPatient</url-pattern>
     </servlet-mapping>
@@ -136,6 +140,10 @@
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/myaccount/ChangePassword</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DischargePatient</servlet-name>
+        <url-pattern>/Patient/discharge</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -148,8 +156,8 @@
         </jsp-property-group>
         <jsp-property-group>
             <description>JSP configuration for the system </description>
-             <url-pattern>/myaccount/accountDetail.jsp</url-pattern>
-             <url-pattern>/myaccount/ChangePassword.jsp</url-pattern>
+            <url-pattern>/myaccount/accountDetail.jsp</url-pattern>
+            <url-pattern>/myaccount/ChangePassword.jsp</url-pattern>
             <url-pattern>/index.jsp</url-pattern>
             <url-pattern>/login.jsp</url-pattern>
             <url-pattern>/forgot_password.jsp</url-pattern>
@@ -163,7 +171,7 @@
             <description>JSP configuration for the admin console
             </description>
             <url-pattern>/home.jsp</url-pattern>
-             <url-pattern>/search.jsp</url-pattern>
+            <url-pattern>/search.jsp</url-pattern>
             <url-pattern>/feedback.jsp</url-pattern>
             <url-pattern>/listfeedback.jsp</url-pattern>
             <url-pattern>/updatefeedback.jsp</url-pattern>

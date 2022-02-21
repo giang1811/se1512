@@ -16,13 +16,11 @@
             <file>file:/C:/Users/Admin/Desktop/SE1512/src/java/dao/PatientDAO.java</file>
         </group>
         <group>
-            <file>file:/E:/SE5/SWP302/SWP302Project/web/assets/js/toast.js</file>
-            <file>file:/E:/SE5/SWP302/SWP302Project/web/login.jsp</file>
-            <file>file:/E:/SE5/SWP302/SWP302Project/src/java/utils/Utils.java</file>
-            <file>file:/E:/SE5/SWP302/SWP302Project/src/java/controller/base/ForgotPasswordServlet.java</file>
-            <file>file:/E:/SE5/SWP302/SWP302Project/src/java/utils/Configs.java</file>
-            <file>file:/E:/SE5/SWP302/SWP302Project/src/java/dao/AccountDAO.java</file>
-            <file>file:/E:/SE5/SWP302/SWP302Project/src/java/controller/base/LoginServlet.java</file>
+            <file>file:/D:/Document/SWP/se1512/src/java/dao/DBcontext.java</file>
+            <file>file:/D:/Document/SWP/se1512/src/java/utils/Configs.java</file>
+            <file>file:/D:/Document/SWP/se1512/src/java/dao/AccountDAO.java</file>
+            <file>file:/D:/Document/SWP/se1512/src/java/controller/base/LoginServlet.java</file>
+            <file>file:/D:/Document/SWP/se1512/web/forgot_password.jsp</file>
         </group>
     </open-files>
 </project-private>

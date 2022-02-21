@@ -175,7 +175,7 @@ public class PatientDAO implements DAO<Patient> {
                 + "         Rows\n"
                 + "    WHERE Row > " + offset + " AND Rows.area_id = " + areaId;
         //System.out.println("sql " + sql);
-        List<Patient> qq = new ArrayList<>();
+        List<Patient> qq = new ArrayList<Patient>();
         qq = parse(sql);
         return qq;
     }
@@ -234,6 +234,14 @@ public class PatientDAO implements DAO<Patient> {
             System.out.println(e);
         }
     }
+
+    public void discharge(Patient patient) {
+        Hashtable<String, String> my_dict = new Hashtable<>();
+        String timeOut = Utils.getToday();
+        my_dict.put("time_out", timeOut);
+        update(patient, my_dict);
+    }
+
     
     public List<Patient> SearchByKey(String key, int offset, int noOfRecords) {
         

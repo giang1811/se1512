@@ -49,7 +49,7 @@ public class RoomDAO implements DAO<Room> {
                 Room p = new Room();
                 p.setRoomId(rs.getInt("room_id"));
                 p.setRoomName(rs.getString("room_name"));
-                p.setBadNumber(rs.getString("bad_number"));
+                p.setBedNumber(rs.getString("bed_number"));
                 p.setNote(rs.getString("note"));
                 int area_id = rs.getInt("area_id");
                 p.setArea(areaDAO.get(area_id));

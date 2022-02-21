@@ -10,7 +10,7 @@ public class Room  {
  
     private String roomName;
     
-    private String badNumber;
+    private String bedNumber;
     
     private String note;
    
@@ -28,10 +28,10 @@ public class Room  {
     public Room() {
     }
 
-    public Room(Integer roomId, String roomName, String badNumber, String note, Area khuCachLy) {
+    public Room(Integer roomId, String roomName, String bedNumber, String note, Area khuCachLy) {
         this.roomId = roomId;
         this.roomName = roomName;
-        this.badNumber = badNumber;
+        this.bedNumber = bedNumber;
         this.note = note;
         this.area = khuCachLy;
     }
@@ -52,12 +52,12 @@ public class Room  {
         this.roomName = roomName;
     }
 
-    public String getBadNumber() {
-        return badNumber;
+    public String getBedNumber() {
+        return bedNumber;
     }
 
-    public void setBadNumber(String badNumber) {
-        this.badNumber = badNumber;
+    public void setBedNumber(String bedNumber) {
+        this.bedNumber = bedNumber;
     }
 
     public String getNote() {
@@ -70,7 +70,7 @@ public class Room  {
 
     @Override
     public String toString() {
-        return "Phong{" + "roomId=" + roomId + ", roomName=" + roomName + ", badNumber=" + badNumber + ", note=" + note + ", khuCachLy=" + area + '}';
+        return "Phong{" + "roomId=" + roomId + ", roomName=" + roomName + ", bedNumber=" + bedNumber + ", note=" + note + ", khuCachLy=" + area + '}';
     }
 
     

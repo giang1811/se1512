@@ -18,7 +18,7 @@ and open the template in the editor.
 
 @font-face {
     font-family: Roboto;
-    src:url(assets/fonts/Roboto/Roboto-Regular.ttf);
+    src:url(../../fonts/Roboto/Roboto-Regular.ttf);
 }
 
 html {
