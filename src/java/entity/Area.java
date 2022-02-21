@@ -5,10 +5,6 @@
  */
 package entity;
 
-/**
- *
- * @author CHUNG
- */
 
 public class Area {
     private int areaId;
@@ -60,6 +56,6 @@ public class Area {
 
     @Override
     public String toString() {
-        return "KhuCachLy{" + "areaId=" + areaId + ", areaName=" + areaName + ", areaAddress=" + areaAddress + ", contact=" + contact + '}';
+        return "Area{" + "areaId=" + areaId + ", areaName=" + areaName + ", areaAddress=" + areaAddress + ", contact=" + contact + '}';
     } 
 }

@@ -72,6 +72,26 @@
         <servlet-name>home</servlet-name>
         <servlet-class>controller.base.home</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewRoom</servlet-name>
+        <servlet-class>controller.room.ViewRoom</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddRoom</servlet-name>
+        <servlet-class>controller.room.AddRoom</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDetail</servlet-name>
+        <servlet-class>controller.room.ViewDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRoom</servlet-name>
+        <servlet-class>controller.room.UpdateRoom</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRoom</servlet-name>
+        <servlet-class>controller.room.DeleteRoom</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -136,6 +156,26 @@
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/myaccount/ChangePassword</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewRoom</servlet-name>
+        <url-pattern>/Room/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRoom</servlet-name>
+        <url-pattern>/Room/add</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetail</servlet-name>
+        <url-pattern>/Room/viewDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRoom</servlet-name>
+        <url-pattern>/Room/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRoom</servlet-name>
+        <url-pattern>/Room/delete</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -168,6 +208,7 @@
             <url-pattern>/listfeedback.jsp</url-pattern>
             <url-pattern>/updatefeedback.jsp</url-pattern>
             <url-pattern>/Patient/*</url-pattern>
+            <url-pattern>/Room/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header2.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>

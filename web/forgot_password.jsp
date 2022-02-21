@@ -6,7 +6,7 @@
 <div class="form-container">
     <form action="ForgotPassword" method="POST" id="form-dn" class="form">
         <h3 class="heading">Tìm lại mật khẩu</h3>
-        <p class="desc">Tìm lại mật khẩu để đăng nhập nào</p>
+        <p class="desc">Tìm lại mật khẩu để đăng nhập</p>
 
         <div class="spacer"></div>
 
