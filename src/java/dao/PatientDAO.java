@@ -62,7 +62,7 @@ public class PatientDAO implements DAO<Patient> {
                 p.setAge(rs.getInt("age"));
                 p.setGender(rs.getString("gender"));
                 p.setAddress(rs.getString("address"));
-                p.setPassport(rs.getString("partpost"));
+                p.setPassport(rs.getString("passpost"));
                 p.setPhoneNumber(rs.getInt("phone"));
                 p.setRegion(rs.getString("region"));
                 p.setSuspicionLevel(rs.getString("suspicion_level"));
