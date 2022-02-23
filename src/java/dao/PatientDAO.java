@@ -81,6 +81,12 @@ public class PatientDAO implements DAO<Patient> {
         return null;
     }
 
+    /**
+     * GET PATIENT BY PATIENT_ID
+     *
+     * @param id patient_id
+     * @return Patient
+     */
     @Override
     public Patient get(int id) {
         String sql = "SELECT * from patient where patient_id = " + id;
@@ -90,7 +96,7 @@ public class PatientDAO implements DAO<Patient> {
     }
 
     /**
-     * Get Patient by account_id
+     * GET PATIENT BY ACCOUNT_ID
      *
      * @param id
      * @return Patient
@@ -102,6 +108,11 @@ public class PatientDAO implements DAO<Patient> {
         return (qq.isEmpty() ? null : qq.get(0));
     }
 
+    /**
+     * GET ALL PATIENTS
+     *
+     * @return List of Patients
+     */
     @Override
     public List<Patient> getAll() {
         String sql = "SELECT * from patient";
@@ -148,27 +159,18 @@ public class PatientDAO implements DAO<Patient> {
     }
 
     /**
-     * Get Number of Patient stay in Area
+     * GET NoOfRecords OF PATIENTS FROM OFFSET IN THE GIVEN AREA
      *
      * @param offset initial Row
-     * @param noOfRecords number of Patient
+     * @param noOfRecords number of rows
      * @param areaId area_id
-     * @return List of Patient
+     * @return List of Patients
      */
     public List<Patient> getList(int offset, int noOfRecords, int areaId) {
-        String sql = "WITH Rows AS\n"
-                + "(\n"
-                + "    SELECT\n"
-                + "              ROW_NUMBER() OVER (ORDER BY patient_id) [Row]\n"
-                + "            , *\n"
-                + "        FROM\n"
-                + "              dbo.patient\n"
-                + ")\n"
-                + "SELECT TOP " + noOfRecords + "\n"
-                + "          *\n"
-                + "     FROM\n"
-                + "         Rows\n"
-                + "    WHERE Row > " + offset + " AND Rows.area_id = " + areaId;
+        String sql = "SELECT * FROM dbo.patient\n"
+                + "WHERE area_id = " + areaId + "\n"
+                + "ORDER BY patient_id\n"
+                + "OFFSET " + offset + " ROWS FETCH NEXT " + noOfRecords + " ROWS ONLY";
         //System.out.println("sql " + sql);
         List<Patient> qq = new ArrayList<>();
         qq = parse(sql);
@@ -176,7 +178,24 @@ public class PatientDAO implements DAO<Patient> {
     }
 
     /**
-     * Get Number of Record in Area
+     * GET NoOfRecords OF PATIENTS FROM OFFSET
+     * 
+     * @param offset initial row
+     * @param noOfRecords number of rows
+     * @return List of Patients
+     */
+    public List<Patient> getListAll(int offset, int noOfRecords) {
+        String sql = "SELECT * FROM dbo.patient\n"
+                + "ORDER BY patient_id\n"
+                + "OFFSET " + offset + " ROWS FETCH NEXT " + noOfRecords + " ROWS ONLY";
+        //System.out.println("sql " + sql);
+        List<Patient> qq = new ArrayList<>();
+        qq = parse(sql);
+        return qq;
+    }
+
+    /**
+     * Get Number of Records in Area
      *
      * @param areaId
      * @return number of record
@@ -196,7 +215,7 @@ public class PatientDAO implements DAO<Patient> {
     /**
      * GET LIST OF PATIENTS IN GIVEN DAY DURATION
      *
-     * @param duration day
+     * @param duration number of days
      * @return list of patients
      */
     public int getPatientsInDuration(int duration) {
@@ -209,6 +228,7 @@ public class PatientDAO implements DAO<Patient> {
 
     /**
      * GEt NUMBER OF PATIENTS IN 1 CERTAIN DATE
+     *
      * @param date
      * @return NUMBER OF PATIENTS IN CERTAIN DATE
      */
@@ -263,6 +283,5 @@ public class PatientDAO implements DAO<Patient> {
 
     public static void main(String[] args) throws ParseException {
         PatientDAO dao = new PatientDAO();
-        System.out.println(dao.getNuPatientsInDate("16/02/2022"));
     }
 }

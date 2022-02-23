@@ -5,14 +5,16 @@
  */
 package controller.base;
 
-import dao.AccountDAO;
 import dao.PatientDAO;
-import entity.Area;
 import entity.Account;
-import entity.Nurse;
-import entity.Patient;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,16 +40,23 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
+
         HttpSession ss = request.getSession();
+        PatientDAO patientDAO = new PatientDAO();
         Account account = (Account) ss.getAttribute("userLogin");
-        PrintWriter out = response.getWriter();
         Notification noti = null;
         RequestDispatcher rt = null;
-        PatientDAO patientDAO = new PatientDAO();
-        // New patients in the following days
-        String[] dates = {"12/02/2022", "13/02/2022", "14/02/2022", "15/02/2022", "16/02/2022", "17/02/2022", "18/02/2022"};
-        int[] arrPatient = new int[dates.length];
-        int newPatientWeek = patientDAO.getPatientsInDuration(7);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
+        LocalDate now = LocalDate.now();
+        String[] dates = {"", "", "", "", "", ""};
+        int index = 0;
+        for (int i = 5; i >= 0; i--) {
+            dates[index++] = formatter.format(now.minus(i, ChronoUnit.DAYS));
+        }
+
+
+        int[] arrPatient = new int[dates.length]; // New Patients in given date
+        int newPatientWeek = patientDAO.getPatientsInDuration(7); // New Patients in 1 week
         for (int i = 0; i < dates.length; i++) {
             arrPatient[i] = patientDAO.getNuPatientsInDate(dates[i]);
         }
@@ -55,34 +64,34 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("dates", dates);
         request.setAttribute("new", arrPatient);
         int id = account.getType().getAccountTypeId();
-        switch (id){
-            case 1: //manager 
+        switch (id) {
+            case 1: // Manager 
                 noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Manager", "success");
                 request.setAttribute("notify", noti);
                 rt = request.getRequestDispatcher("home.jsp");
                 rt.forward(request, response);
                 break;
-            case 2: // nurse
-                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Staff", "success");
+            case 2: // Nurse
+                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Nurse", "success");
                 request.setAttribute("notify", noti);
                 rt = request.getRequestDispatcher("home.jsp");
                 rt.forward(request, response);
                 break;
-            case 3: // user
+            case 3: // Patient
                 noti = new Notification("Success", "Chào mừng bạn đến với hệ thống của chúng tôi", "success");
                 request.setAttribute("notify", noti);
                 rt = request.getRequestDispatcher("home.jsp");
                 rt.forward(request, response);
                 break;
-            case 4:
-                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Admin", "success");
+            case 4: // Doctor
+                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Doctor", "success");
                 request.setAttribute("notify", noti);
                 rt = request.getRequestDispatcher("home.jsp");
                 rt.forward(request, response);
                 break;
-            default :
-                
-        } 
+            default:
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

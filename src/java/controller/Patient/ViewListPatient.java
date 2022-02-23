@@ -39,6 +39,7 @@ public class ViewListPatient extends HttpServlet {
         HttpSession ss = request.getSession();
         Account user = (Account) ss.getAttribute("userLogin");
         PrintWriter out = response.getWriter();
+        PatientDAO dao = new PatientDAO();
 
         // if nurse login
         if (user.getType().getAccountTypeId() == 2) {
@@ -46,7 +47,6 @@ public class ViewListPatient extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            PatientDAO dao = new PatientDAO();
             List<Patient> list = dao.getList((page - 1) * recordsPerPage, recordsPerPage, nurse.getId_area());
             int noOfRecords = dao.getNoOfRecord(nurse.getId_area());
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
@@ -56,14 +56,13 @@ public class ViewListPatient extends HttpServlet {
             request.setAttribute("currentPage", page);
             RequestDispatcher view = request.getRequestDispatcher("../Patient/list.jsp");
             view.forward(request, response);
-        //  if manager login
+            //  if manager login
         } else {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            PatientDAO dao = new PatientDAO();
-            List<Patient> list = dao.getList((page - 1) * recordsPerPage, recordsPerPage, 1);
-            int noOfRecords = dao.getNoOfRecord(1);
+            List<Patient> list = dao.getListAll((page - 1) * recordsPerPage, recordsPerPage);
+            int noOfRecords = dao.getAll().size();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfRecords", noOfRecords);
             request.setAttribute("list", list);

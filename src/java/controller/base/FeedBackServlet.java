@@ -5,12 +5,15 @@
  */
 package controller.base;
 
+import dao.PatientDAO;
 import dao.ReportDAO;
 import entity.Account;
+import entity.Patient;
 import entity.Report;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.Utils;
 
 /**
  *
@@ -80,18 +84,26 @@ public class FeedBackServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String content = request.getParameter("report");
-        long millis = System.currentTimeMillis();
-        java.sql.Date date = new java.sql.Date(millis);
+        PatientDAO patientDAO = new PatientDAO();
+        ReportDAO re = new ReportDAO();
+        PrintWriter out = response.getWriter();
+
+        Timestamp date = new Timestamp(System.currentTimeMillis());
+
         Report report = new Report();
         report.setContent(content);
         report.setCreateDate(date);
+
         HttpSession session = request.getSession();
         Account userLogin = (Account) session.getAttribute("userLogin");
+        Patient patient = patientDAO.getPatientByAccountId(userLogin.getAccountId());
         report.setIdPatient(userLogin.getPatient().getPatientId());
-        ReportDAO re = new ReportDAO();
         re.create(report);
-        List<Report> list = re.getAll();
+       
+        List<Report> list = re.getAllByPatientId(patient.getPatientId());
         request.setAttribute("list", list);
         RequestDispatcher rt = request.getRequestDispatcher("listfeedback.jsp");
         rt.forward(request, response);

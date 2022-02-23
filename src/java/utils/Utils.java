@@ -5,6 +5,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -44,7 +49,7 @@ public class Utils {
         return result;
     }
 
-    public static int getDistanceTime(Date timeBegin, Date timeEnd) {
+    public int getDistanceTime(Date timeBegin, Date timeEnd) {
         if (timeEnd == null) {
             timeEnd = new Date();
         }
@@ -132,10 +137,10 @@ public class Utils {
     }
 
     public static void main(String[] args) {
-        Utils utils = new Utils();
-        String password = utils.randomPassword(5);
-        String password_hash = utils.md5(password);
-        System.out.println(password);
-        System.out.println(password_hash);
+        String obj = "hello";
+        String obj1 = "world";
+        String obj2 = obj;
+        System.out.println(obj.equals(obj2) + " " + obj2.compareTo(obj));
+        
     }
 }

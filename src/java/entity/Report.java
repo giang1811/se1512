@@ -5,22 +5,23 @@
  */
 package entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
  * @author Admin
  */
 public class Report {
+
     private int id_report;
     private String content;
-    private Date createDate;
+    private Timestamp createDate;
     private int idPatient;
 
     public Report() {
     }
 
-    public Report(int id_report, String content, Date createDate, int idPatient) {
+    public Report(int id_report, String content, Timestamp createDate, int idPatient) {
         this.id_report = id_report;
         this.content = content;
         this.createDate = createDate;
@@ -43,11 +44,11 @@ public class Report {
         this.content = content;
     }
 
-    public Date getCreateDate() {
+    public Timestamp getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(Timestamp createDate) {
         this.createDate = createDate;
     }
 
@@ -64,7 +65,4 @@ public class Report {
         return "Report{" + "id_report=" + id_report + ", content=" + content + ", createDate=" + createDate + ", idPatient=" + idPatient + '}';
     }
 
-    
-    
-    
 }

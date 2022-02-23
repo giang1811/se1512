@@ -42,12 +42,17 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession ss = request.getSession();
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        String passwordMd5 = md5(password);
         AccountDAO accountDAO = new AccountDAO();
         NurseDAO nurseDAO = new NurseDAO();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        // encrypt password to md5
+        String passwordMd5 = md5(password);
+
+        // find account match the given username and password
         Account account = accountDAO.findByUsernamePassword(username, passwordMd5);
+
         if (account == null) {
             Notification noti = new Notification("Error", "Tài khoản không đúng. Vui lòng kiểm tra lại.", "error");
             request.setAttribute("notify", noti);
@@ -55,9 +60,12 @@ public class LoginServlet extends HttpServlet {
 
             rt.forward(request, response);
         } else {
+            // if patient login
             PatientDAO patientDAO = new PatientDAO();
             account.setPatient(patientDAO.getPatientByAccountId(account.getAccountId()));
             ss.setAttribute("userLogin", account);
+            
+            // if nurse login
             if (account.getType().getAccountTypeId() == 2) {
                 Nurse nurse = nurseDAO.get(account.getAccountId());
                 ss.setAttribute("nurse", nurse);

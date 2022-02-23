@@ -16,7 +16,7 @@ public class Account {
 
     private TypeAccount type;
 
-    private Patient patient;
+    private Patient patient; // unrealistic
 
     public Account() {
     }

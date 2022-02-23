@@ -52,6 +52,10 @@
         <servlet-name>ForgotPasswordServlet</servlet-name>
         <servlet-class>controller.base.ForgotPasswordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAllPatient</servlet-name>
+        <servlet-class>controller.Patient.ViewAllPatient</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>ForgotPasswordServlet</servlet-name>
         <url-pattern>/ForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllPatient</servlet-name>
+        <url-pattern>/Patient/view-all</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

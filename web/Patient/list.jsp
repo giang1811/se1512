@@ -15,13 +15,15 @@
     <div class="table-list">
         <table class="table-list__user">
             <tr>
-                <th width="7%">Mã Bệnh Nhân</th>
-                <th width="23%">Họ tên</th>
-                <th width="7%">Tuổi</th>
-                <th width="7%">Phòng</th>
-                <th width="16%">Tình trạng</th>
-                <th width="20%">Mức độ nghi nhiễm</th>
-                <th width="20%">Hành động</th>
+                <th width="5%">Mã Bệnh Nhân</th>
+                <th width="17%">Họ tên</th>
+                <th width="5%">Tuổi</th>
+                <th width="5%">Phòng</th>
+                <th width="5%">Khu cách ly</th>
+                <th width="10%">Quốc tịch</th>
+                <th width="15%">Tình trạng</th>
+                <th width="19%">Mức độ nghi nhiễm</th>
+                <th width="19%">Hành động</th>
             </tr>
             <c:forEach var="patient" items="${list}">
                 <tr>
@@ -29,7 +31,10 @@
                     <td>${patient.getPatientName()}</td>
                     <td>${patient.getAge()}</td>
                     <td>${patient.getRoom().getRoomName()}</td>
-                <c:if test="${empty patient.getTimeOut()}"><td>${Utils.getDistanceTime(nguoiCachly.getTimeIn(), patient.getTimeOut()) + 1} ngày</td></c:if>
+                    <td>${patient.getArea().getAreaId()}</td>
+                    <td>${patient.getRegion()}</td>
+                <c:if test="${empty patient.getTimeOut()}"> <td>${Utils.getDistanceTime(patient.getTimeIn(), patient.getTimeOut()) + 1} ngày</td>
+                </c:if>
                 <c:if test="${not empty patient.getTimeOut()}"><td style="color: red; font-weight: 500;">Đã ra</td></c:if>
                 <td data-filetype="${patient.getSuspicionLevel()}">${patient.getSuspicionLevel()}</td>
                 <td class="td-action">

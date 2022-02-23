@@ -26,7 +26,7 @@
         <link rel="stylesheet" type="text/css" media="screen" href="<%=request.getContextPath()%>/assets/css/base/toast.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" integrity="sha512-yFjZbTYRCJodnuyGlsKamNE/LlEaEAxSUDe5+u61mV8zzqJVFOH7TnULE2/PP/l5vKWpUNnF4VGVkXh3MjgLsg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>   
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        
+
     </head>
     <body>
         <header>
@@ -92,11 +92,11 @@
                         <div class="space"></div>
 
                     </li>
-                    <li><a class="sidebar-li" href="<%=request.getContextPath()%>/home.jsp"><i class="fas fa-home sidebar-icon"></i>
+                    <li><a class="sidebar-li" href="home"><i class="fas fa-home sidebar-icon"></i>
                             <span class="sidebar-info">Dashboard</span>
                         </a>
                     </li>
-                    <li><a class="sidebar-li active" href="<%=request.getContextPath()%>/home.jsp"><i class="sidebar-icon"></i>
+                    <li><a class="sidebar-li active" href="home"><i class="sidebar-icon"></i>
                             <span class="sidebar-info">Home</span>
                         </a>
                     </li>
@@ -111,8 +111,8 @@
                             acocuntTypeId = 0;
                         }
 
-    if (acocuntTypeId != 3) {      //Manager or Staff
-                    %>
+                        if (acocuntTypeId != 3) {      //Manager or Nurse
+%>
                     <li><a class="sidebar-li" href="<%=request.getContextPath()%>/Patient/view-list"><i class="fas fa-user sidebar-icon"></i>
                             <span class="sidebar-info">Người cách ly</span>
                         </a>
@@ -120,7 +120,7 @@
                     <% if (acocuntTypeId != 2) { // Manager %>  
 
                     <li><a class="sidebar-li" href=""><i class="fas fa-file-invoice sidebar-icon"></i>
-                            <span class="sidebar-info">QL tài khoản</span>
+                            <span class="sidebar-info">Quản lý tài khoản</span>
                         </a>
                     </li>
                     <% }%>
@@ -129,7 +129,7 @@
                         </a>
                     </li>
                     <% }%>
-                    <% if (acocuntTypeId == 3) { // Manager %>  
+                    <% if (acocuntTypeId == 3) { // Patient %>  
                     <li><a class="sidebar-li" href="FeedBackServlet"><i class="fas fa-file-invoice sidebar-icon"></i>
                             <span class="sidebar-info">FeedBack</span>
                         </a>
