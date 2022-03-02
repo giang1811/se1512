@@ -24,7 +24,7 @@ import java.util.List;
 import utils.Utils;
 
 public class PatientDAO implements DAO<Patient> {
-    
+
     private final String SQL_INSERT = "INSERT INTO dbo.patient\n"
             + "(\n"
             + "    full_name,\n"
@@ -43,12 +43,12 @@ public class PatientDAO implements DAO<Patient> {
             + ")\n"
             + "VALUES\n"
             + "(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    
+
     Connection conn = DBcontext.getConnection();
-    
+
     AreaDAO areaDAO = new AreaDAO();
     RoomDAO roomDAO = new RoomDAO();
-    
+
     @Override
     public List<Patient> parse(String sql) {
         try {
@@ -80,7 +80,7 @@ public class PatientDAO implements DAO<Patient> {
         }
         return null;
     }
-    
+
     @Override
     public Patient get(int id) {
         String sql = "SELECT * from patient where patient_id = " + id;
@@ -101,12 +101,14 @@ public class PatientDAO implements DAO<Patient> {
         qq = parse(sql);
         return (qq.isEmpty() ? null : qq.get(0));
     }
+
     public Patient getByAccountId(int id) {
         String sql = "SELECT * from patient where account_id = " + id;
         List<Patient> qq = new ArrayList<>();
         qq = parse(sql);
         return (qq.isEmpty() ? null : qq.get(0));
     }
+
     @Override
     public List<Patient> getAll() {
         String sql = "SELECT * from patient";
@@ -114,24 +116,23 @@ public class PatientDAO implements DAO<Patient> {
         qq = parse(sql);
         return qq;
     }
-    
+
     @Override
-    public void update(Patient t, Hashtable<String, String> my_dict) {
-        if (!my_dict.isEmpty()) {
+    public void update(Patient t, Hashtable<String, String> hashTable) {
+        if (!hashTable.isEmpty()) {
             String sql_update = "Update patient set ";
             try (
                 PreparedStatement prep = conn.prepareStatement(sql_update);) {
                 String change = "";
-                for (String key : my_dict.keySet()) {
-                    String value = my_dict.get(key);
+                for (String key : hashTable.keySet()) {
+                    String value = hashTable.get(key);
                     try {
                         int values = Integer.parseInt(value);
-                        change += key + " = " + values + ",";
+                        change += key + " = " + values;
                     } catch (Exception e) {
-                        change += key + " = '" + value + "',";
+                        change += key + " = '" + value + "'";
                     }
                 }
-                change = change.substring(0, change.length() - 1);
                 sql_update += change + " where patient_id = " + t.getPatientId();
                 Statement stmt = conn.createStatement();
                 stmt.executeUpdate(sql_update);
@@ -140,7 +141,7 @@ public class PatientDAO implements DAO<Patient> {
             }
         }
     }
-    
+
     @Override
     public void delete(Patient t) {
         try {
@@ -211,11 +212,10 @@ public class PatientDAO implements DAO<Patient> {
     int phone_int = Integer.parseInt(phone);
     String roomName = request.getParameter("roomName");
      */
-    
     @Override
     public void create(Patient p) {
         try (
-            PreparedStatement prep = conn.prepareStatement(SQL_INSERT)) {
+                PreparedStatement prep = conn.prepareStatement(SQL_INSERT)) {
             prep.setString(1, p.getPatientName());
             prep.setInt(2, p.getAge());
             prep.setString(3, p.getGender());
@@ -236,24 +236,47 @@ public class PatientDAO implements DAO<Patient> {
     }
 
     public void discharge(Patient patient) {
-        Hashtable<String, String> my_dict = new Hashtable<>();
+        Hashtable<String, String> hashTable = new Hashtable<>();
         String timeOut = Utils.getToday();
-        my_dict.put("time_out", timeOut);
-        update(patient, my_dict);
+        hashTable.put("time_out", timeOut);
+        update(patient, hashTable);
     }
 
-    
     public List<Patient> SearchByKey(String key, int offset, int noOfRecords) {
-        
+
         String sql = "SELECT * from patient where full_name like '%" + key + "%'";
         List<Patient> qq = new ArrayList<>();
         qq = parse(sql);
         return qq;
     }
-    
+
     public static void main(String[] args) throws ParseException {
         PatientDAO dao = new PatientDAO();
         Patient p = dao.get(7);
         dao.delete(p);
     }
+
+//     public void update(Patient t, Hashtable<String, String> hashTable) {
+//        if (!hashTable.isEmpty()) {
+//            String sql_update = "Update patient set ? = ? where patient_id = ?";
+//            try {
+//                PreparedStatement prep = conn.prepareStatement(sql_update);
+//                for (String key : hashTable.keySet()) {
+//                    try {
+//                        int value = Integer.parseInt(hashTable.get(key));
+//                        prep.setString(1, key);
+//                        prep.setInt(2, value);
+//                        prep.setInt(3, t.getPatientId());
+//                    } catch (Exception e) {
+//                        prep.setString(1, key);
+//                        prep.setString(2, hashTable.get(key));
+//                        prep.setInt(3, t.getPatientId());
+//                    }
+//                }
+//                prep.executeUpdate();
+//            } catch (SQLException x) {
+//                x.printStackTrace();
+//            }
+//        }
+//    }
 }

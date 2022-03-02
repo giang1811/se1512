@@ -75,6 +75,9 @@
     <servlet>
         <servlet-name>DischargePatient</servlet-name>
         <servlet-class>controller.Patient.DischargePatient</servlet-class>
+        <servlet-name>AddApplication</servlet-name>
+        <servlet-name>ListApplication</servlet-name>
+        <servlet-class>controller.Report.UpdateReport</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -143,6 +146,20 @@
     <servlet-mapping>
         <servlet-name>DischargePatient</servlet-name>
         <url-pattern>/Patient/discharge</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddApplication</servlet-name>
+        <url-pattern>/AddApplication</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListApplication</servlet-name>
+        <url-pattern>/ListApplication</url-pattern>
+    <servlet-mapping>
+        <servlet-name>UpdateApplication</servlet-name>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailApplication</servlet-name>
+        <url-pattern>/ViewDetailApplication</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

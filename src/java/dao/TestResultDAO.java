@@ -27,7 +27,7 @@ public class TestResultDAO implements DAO<TestResult> {
     private final String SQL_UPDATE = "update test_result set test_result_id = ?, "+
             " test_name = ?, result = ?, create_date = ? "+
             "where test_result_id = ?";
-    
+        
     Connection conn = DBcontext.getConnection();
     PatientDAO patientDAO = new PatientDAO();
     

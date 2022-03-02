@@ -40,26 +40,26 @@ public class home extends HttpServlet {
         RequestDispatcher rt = null;
         int id = account.getType().getAccountTypeId();
         switch (id){
-            case 1: //manager 
-                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Manager", "success");
+            case 1: //admin
+                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Admin", "success");
                 request.setAttribute("notify", noti);
                 rt = request.getRequestDispatcher("home.jsp");
                 rt.forward(request, response);
                 break;
-            case 2: // nurse
-                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Staff", "success");
+            case 2: //nurse
+                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Nurse", "success");
                 request.setAttribute("notify", noti);
                 rt = request.getRequestDispatcher("home.jsp");
                 rt.forward(request, response);
                 break;
-            case 3: // user
+            case 3: //patient
                 noti = new Notification("Success", "Chào mừng bạn đến với hệ thống của chúng tôi", "success");
                 request.setAttribute("notify", noti);
                 rt = request.getRequestDispatcher("home.jsp");
                 rt.forward(request, response);
                 break;
-            case 4:
-                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Admin", "success");
+            case 4://doctor
+                noti = new Notification("Success", "Chào mừng bạn đến với hệ thống với vai trò là Doctor", "success");
                 request.setAttribute("notify", noti);
                 rt = request.getRequestDispatcher("home.jsp");
                 rt.forward(request, response);

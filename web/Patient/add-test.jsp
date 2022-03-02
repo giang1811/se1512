@@ -31,7 +31,7 @@
             <span class="form-span">Xét nghiệm</span>
             <div class="form-group">
                 <label for="time" class="form-label">Thời gian:</label>
-                <input type="datetime-local" id="tg" class="form-control"
+                <input type="datetime-local" id="timeIn" class="form-control"
                        name="time" value="<%= utils.getToday()%>"
                        min="<%=patient.getTimeIn()%>">
                 <span class="form-message"></span>
@@ -42,9 +42,11 @@
                 <span class="form-message"></span>
             </div>
             <div class="form-group">
-                <label for="result" class="form-label">Kết quả</label>
-                <input id="result" class="form-control" name="result" type="text" required>
-                <span class="form-message"></span>
+                <label for="result" class="form-label" style="width: 145px">Kết quả</label>
+                <select name="testresult" id="testresult">
+                     <option value="positive">Dương tính</option>
+                     <option value="negative">Âm tính</option>
+                </select>
             </div>
             <button type = "submit" class="form-submit"><i class="far fa-save"></i><span>Lưu</span></button>
         </form>

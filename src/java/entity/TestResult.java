@@ -74,6 +74,6 @@ public class TestResult{
 
     @Override
     public String toString() {
-        return "KqXetNghiem{" + "testResultId=" + testResultId + ", testType=" + testName + ", result=" + result + ", testTime=" + createDate + ", ngCachLy=" + patient + '}';
+        return "KqXetNghiem{" + "testResultId=" + testResultId + ", testType=" + testName + ", result=" + result + ", createDate=" + createDate + ", patient=" + patient.getPatientName() + '}';
     }
 }

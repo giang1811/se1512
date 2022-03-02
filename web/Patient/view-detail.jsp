@@ -14,15 +14,7 @@
             <span>Họ và tên: ${patient.getPatientName()}</span>
         </div>
         <div class="content-header__btn"><a href="<%=request.getContextPath()%>/Patient/discharge?id=${patient.getPatientId()}"><i class="fas fa-sign-out-alt"></i> Ra viện</a></div>
-        <div>
-            <button id="code_show">Lấy mã xác nhận </button>
-            <strong id="code_show_info" style="display: none">${code}</strong>
-            <script>
-                $("#code_show").click(function () {
-                    $("#code_show_info").toggle(1000);
-                });
-            </script>
-        </div>
+
     </div>
     <div class="content-middle"> 
         <div class="content-middle__lylich space3">
@@ -55,18 +47,30 @@
                 <li>Chưa tham gia lần xét nghiệm nào!</li>
                 </c:if>
                 <c:if test="${not empty results}">
+                <table style="width:60%">
+                    <tr>
+                        <th>Ngày test</th>
+                        <th>Tên xét nghiệm</th>
+                        <th>Kết quả</th>
+                    </tr>
                     <c:forEach var="result" items="${results}">
-
-                    <li>Lần : Ngày ${Utils.DATE_FORMATER.format(result.getCreateDate())} ---- Tên xét nghiệm: ${result.getTestName()} ----- Kết quả: ${result.getResult()}</li>
+                        <tr>
+                            <td>${result.getCreateDate()}</td>
+                            <td>${result.getTestName()}</td>
+                            <td>${result.getResult()}</td>
+                        </tr>
                     </c:forEach>
-                </c:if>
+                </table>
+            </c:if>
         </ul>
 
 
     </div>
 
     <div class="content-btn">
-        <a href="<%=request.getContextPath()%>/Patient/add-test.jsp?id=${patient.getPatientId()}" style="background-color: #6FCF97"><i class="fas fa-pen"></i> Thêm xét nghiệm</a>
+        <c:if test="${empty patient.getTimeOut()}">
+            <a href="<%=request.getContextPath()%>/Patient/add-test.jsp?id=${patient.getPatientId()}" style="background-color: #6FCF97"><i class="fas fa-pen"></i> Thêm xét nghiệm</a>
+        </c:if>        
         <a href="<%=request.getContextPath()%>/Patient/update.jsp?id=${patient.getPatientId()}" style="background-color: #00AAFF"><i class="fas fa-user-edit"></i> Chỉnh sửa hồ sơ</a>
         <a href="<%=request.getContextPath()%>/Patient/delete?id=${patient.getPatientId()}" style="background-color: red;"><i class="fas fa-trash-alt"></i> Xóa</a>
     </div>

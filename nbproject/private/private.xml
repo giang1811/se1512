@@ -16,11 +16,12 @@
             <file>file:/C:/Users/Admin/Desktop/SE1512/src/java/dao/PatientDAO.java</file>
         </group>
         <group>
+            <file>file:/D:/Document/SWP/se1512/src/java/entity/TestResult.java</file>
             <file>file:/D:/Document/SWP/se1512/src/java/dao/PatientDAO.java</file>
+            <file>file:/D:/Document/SWP/se1512/src/java/controller/Patient/AddTestPatient.java</file>
             <file>file:/D:/Document/SWP/se1512/src/java/controller/Patient/DischargePatient.java</file>
-            <file>file:/D:/Document/SWP/se1512/web/Patient/view-detail.jsp</file>
-            <file>file:/D:/Document/SWP/se1512/nbproject/build-impl.xml</file>
-            <file>file:/D:/Document/SWP/se1512/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Document/SWP/se1512/src/java/dao/TestResultDAO.java</file>
+            <file>file:/D:/Document/SWP/se1512/src/java/entity/Patient.java</file>
         </group>
     </open-files>
 </project-private>

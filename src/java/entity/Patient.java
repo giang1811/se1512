@@ -33,7 +33,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Integer patientId, String patientName, int age, String passPort, String gender, String address, int phoneNumber, String region, String suspicionLevel, Date timeIn, Date timeOut, Room phong, Area khuCachLy) {
+    public Patient(Integer patientId, String patientName, int age, String passPort, String gender, String address, int phoneNumber, String region, String suspicionLevel, Date timeIn, Date timeOut, Room room, Area area) {
         this.patientId = patientId;
         this.patientName = patientName;
         this.age = age;
@@ -45,8 +45,8 @@ public class Patient {
         this.suspicionLevel = suspicionLevel;
         this.timeIn = timeIn;
         this.timeOut = timeOut;
-        this.room = phong;
-        this.area = khuCachLy;
+        this.room = room;
+        this.area = area;
     }
 
     public Patient(Integer patientId) {
@@ -145,16 +145,16 @@ public class Patient {
         return room;
     }
 
-    public void setRoom(Room phong) {
-        this.room = phong;
+    public void setRoom(Room room) {
+        this.room = room;
     }
 
     public Area getArea() {
         return area;
     }
 
-    public void setArea(Area khuCachLy) {
-        this.area = khuCachLy;
+    public void setArea(Area area) {
+        this.area = area;
     }
 
     @Override

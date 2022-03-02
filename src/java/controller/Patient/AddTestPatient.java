@@ -10,7 +10,9 @@ import dao.TestResultDAO;
 import entity.TestResult;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,10 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 import utils.Notification;
 import utils.Utils;
 
-/**
- *
- * @author hoang
- */
 public class AddTestPatient extends HttpServlet {
 
     
@@ -57,24 +55,27 @@ public class AddTestPatient extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         int id = Integer.parseInt(request.getParameter("id"));
 
-        // change format time
-        String time = request.getParameter("time");
-        String time2 = time.replace("T", " ") + ":00";
+        // change format time       
+       String time = request.getParameter("time").replace("T", " ") + ":00";
         Date createDate = null;
         try {
-            createDate = Utils.DATE_FORMATER.parse(time2);
+            createDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(time);
         } catch (ParseException ex) {
             createDate = new Date();
         }
 
         String testName = request.getParameter("test_name");
-        String result = request.getParameter("result");
+        String result = request.getParameter("testresult");
         TestResultDAO testResultDAO = new TestResultDAO();
         TestResult testResult = new TestResult();
-        testResult.setResult(result);
+        if(result.equals("positive")) {
+            testResult.setResult("Dương Tính");
+        } else {
+            testResult.setResult("Âm Tính");
+        }              
         testResult.setTestName(testName);
-        PatientDAO patientDAo = new PatientDAO();
-        testResult.setPatient(patientDAo.get(id));
+        PatientDAO patientDAO = new PatientDAO();
+        testResult.setPatient(patientDAO.get(id));
         testResult.setCreateDate(new java.sql.Timestamp(createDate.getTime()));
         testResultDAO.create(testResult);
         Notification noti = new Notification("Success", "Đã thêm kết quả xét nghiệm thành công", "success");
